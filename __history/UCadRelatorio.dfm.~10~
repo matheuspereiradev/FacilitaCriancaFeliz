@@ -1,0 +1,243 @@
+object frmCadRelatorio: TfrmCadRelatorio
+  Left = 0
+  Top = 0
+  Caption = 'Cadastrar/editar relat'#243'rio'
+  ClientHeight = 649
+  ClientWidth = 784
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 9
+    Top = 39
+    Width = 35
+    Height = 18
+    Caption = 'T'#237'tulo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 557
+    Top = 39
+    Width = 39
+    Height = 18
+    Caption = 'Grupo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 9
+    Top = 97
+    Width = 54
+    Height = 18
+    Caption = 'Objetivo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 9
+    Top = 210
+    Width = 267
+    Height = 18
+    Caption = 'Acolhimento e apresenta'#231#227'o da atividade'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 9
+    Top = 335
+    Width = 111
+    Height = 18
+    Caption = 'Desenvolvimento'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label5: TLabel
+    Left = 9
+    Top = 476
+    Width = 92
+    Height = 18
+    Caption = 'Momento final'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblTitulo: TLabel
+    Left = 312
+    Top = 8
+    Width = 175
+    Height = 22
+    Caption = 'Cadastrar relat'#243'rio'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object edtTitulo: TEdit
+    Left = 9
+    Top = 63
+    Width = 529
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+  end
+  object cbxGrupos: TComboBox
+    Left = 557
+    Top = 63
+    Width = 217
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Text = 'Nenhum grupo'
+  end
+  object edtObjetivo: TRichEdit
+    Left = 9
+    Top = 118
+    Width = 765
+    Height = 89
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object edtAcolhimento: TRichEdit
+    Left = 9
+    Top = 231
+    Width = 765
+    Height = 98
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+  end
+  object edtDesenvolvimento: TRichEdit
+    Left = 9
+    Top = 357
+    Width = 765
+    Height = 113
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+  end
+  object edtMomentoFinal: TRichEdit
+    Left = 9
+    Top = 500
+    Width = 765
+    Height = 86
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+  end
+  object cbxMes: TComboBox
+    Left = 540
+    Top = 592
+    Width = 145
+    Height = 21
+    ItemIndex = 0
+    TabOrder = 6
+    Text = 'JAN'
+    Items.Strings = (
+      'JAN'
+      'FEV'
+      'MAR'
+      'ABR'
+      'MAI'
+      'JUN'
+      'JUL'
+      'AGO'
+      'SET'
+      'OUT'
+      'NOV'
+      'DEZ')
+  end
+  object cbxAno: TComboBox
+    Left = 696
+    Top = 592
+    Width = 78
+    Height = 21
+    ItemIndex = 0
+    TabOrder = 7
+    Text = '2019'
+    Items.Strings = (
+      '2019'
+      '2020')
+  end
+  object btnSalvarRelatorio: TButton
+    Left = 339
+    Top = 606
+    Width = 159
+    Height = 38
+    Cursor = crHandPoint
+    Caption = 'Salvar'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 8
+    OnClick = btnSalvarRelatorioClick
+  end
+  object qryRelatorio: TADOQuery
+    Connection = frmMenu.conexao
+    Parameters = <>
+    Left = 128
+    Top = 8
+  end
+end

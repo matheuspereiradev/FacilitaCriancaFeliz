@@ -1,0 +1,26 @@
+program Facilita;
+
+uses
+  Vcl.Forms,
+  ULogin in 'ULogin.pas' {frmLogin},
+  UMenu in 'UMenu.pas' {frmMenu},
+  UGrupos in 'UGrupos.pas' {frmGerGrupos},
+  UCadGrupo in 'UCadGrupo.pas' {frmCadEdtGrupo},
+  UCriancas in 'UCriancas.pas' {frmGerCriancas},
+  UCadEdtCrianca in 'UCadEdtCrianca.pas' {frmCadEdtCrianca},
+  UCadRelatorio in 'UCadRelatorio.pas' {frmCadRelatorio},
+  UGerRelatorios in 'UGerRelatorios.pas' {frmGerRelatorios},
+  UImprimirRelatorio in 'UImprimirRelatorio.pas' {frmGerarRelatorio};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmCadEdtCrianca, frmCadEdtCrianca);
+  Application.CreateForm(TfrmCadRelatorio, frmCadRelatorio);
+  Application.CreateForm(TfrmGerRelatorios, frmGerRelatorios);
+  Application.CreateForm(TfrmGerarRelatorio, frmGerarRelatorio);
+  Application.Run;
+end.

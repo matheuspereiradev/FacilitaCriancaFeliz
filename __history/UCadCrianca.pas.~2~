@@ -1,0 +1,38 @@
+unit UCadCrianca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TfrmCadCrianca = class(TForm)
+    lblTitulo: TLabel;
+    edtCodCrianca: TEdit;
+    Label4: TLabel;
+    edtNome: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtNIS: TEdit;
+    dtNasc: TDateTimePicker;
+    Label3: TLabel;
+    Label5: TLabel;
+    edtTerritorioCrianca: TEdit;
+    Label6: TLabel;
+    ComboBox1: TComboBox;
+    btnSalvarGrupo: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadCrianca: TfrmCadCrianca;
+
+implementation
+
+{$R *.dfm}
+
+end.

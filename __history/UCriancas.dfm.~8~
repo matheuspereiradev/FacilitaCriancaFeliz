@@ -1,0 +1,217 @@
+object frmGerCriancas: TfrmGerCriancas
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Gerenciar crian'#231'as'
+  ClientHeight = 599
+  ClientWidth = 756
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblTitulo: TLabel
+    Left = 302
+    Top = 8
+    Width = 177
+    Height = 22
+    Caption = 'Gerenciar crian'#231'as'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblTotalCriancas: TLabel
+    Left = 648
+    Top = 578
+    Width = 100
+    Height = 13
+    Caption = 'Total de crian'#231'as: 00'
+  end
+  object btnCadCrianca: TButton
+    Left = 8
+    Top = 63
+    Width = 129
+    Height = 33
+    Cursor = crHandPoint
+    Caption = 'Novo'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    OnClick = btnCadCriancaClick
+  end
+  object btnEdtCrianca: TButton
+    Left = 160
+    Top = 63
+    Width = 129
+    Height = 33
+    Cursor = crHandPoint
+    Caption = 'Editar'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnEdtCriancaClick
+  end
+  object btnExcCriancas: TButton
+    Left = 312
+    Top = 63
+    Width = 129
+    Height = 33
+    Cursor = crHandPoint
+    Caption = 'Excluir'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+    OnClick = btnExcCriancasClick
+  end
+  object dbgCriancas: TDBGrid
+    Left = 8
+    Top = 106
+    Width = 740
+    Height = 455
+    DataSource = dtsCriancas
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'idCrianca'
+        Title.Alignment = taCenter
+        Title.Caption = 'C'#243'd.'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nomeCrianca'
+        Title.Alignment = taCenter
+        Title.Caption = 'Nome'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 250
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'idadeCrianca'
+        Title.Alignment = taCenter
+        Title.Caption = 'Idade'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nisCrianca'
+        Title.Alignment = taCenter
+        Title.Caption = 'NIS'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 75
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'territorioCrianca'
+        Title.Alignment = taCenter
+        Title.Caption = 'Territ'#243'rio'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 140
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nomeGrupo'
+        Title.Alignment = taCenter
+        Title.Caption = 'Grupo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 130
+        Visible = True
+      end>
+  end
+  object btnAtualizar: TButton
+    Left = 8
+    Top = 569
+    Width = 75
+    Height = 25
+    Caption = 'Atualizar'
+    TabOrder = 4
+    OnClick = btnAtualizarClick
+  end
+  object qryCriancas: TADOQuery
+    Active = True
+    Connection = frmMenu.conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select c.idCrianca, c.nomeCrianca , DATEDIFF(YEAR,c.dtNascCrianc' +
+        'a,GETDATE()) as idadeCrianca, c.nisCrianca, c.territorioCrianca'
+      #9'  ,g.nomeGrupo'
+      'from crianca c'
+      'inner join grupo g on g.idGrupo=c.idGrupo'
+      'where g.idVisitador=2')
+    Left = 504
+    Top = 40
+  end
+  object dtsCriancas: TDataSource
+    DataSet = qryCriancas
+    Left = 616
+    Top = 56
+  end
+  object qryOperacoesCrianca: TADOQuery
+    Connection = frmMenu.conexao
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 96
+    Top = 16
+  end
+end

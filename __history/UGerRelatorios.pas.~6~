@@ -1,0 +1,114 @@
+unit UGerRelatorios;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB,
+  Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmGerRelatorios = class(TForm)
+    DBGrid1: TDBGrid;
+    lblTitulo: TLabel;
+    btnCadRelatorio: TButton;
+    btnEdtRel: TButton;
+    btnExcluirRel: TButton;
+    dtsRelatorio: TDataSource;
+    qryRelatorios: TADOQuery;
+    Label3: TLabel;
+    Label2: TLabel;
+    cbxMes: TComboBox;
+    cbxAno: TComboBox;
+    btnPesquisar: TButton;
+    Button1: TButton;
+    lblTotal: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure pesquisarRelatorios;
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmGerRelatorios: TfrmGerRelatorios;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+procedure TfrmGerRelatorios.btnPesquisarClick(Sender: TObject);
+    begin
+       pesquisarRelatorios;
+    end;
+
+procedure TfrmGerRelatorios.Button1Click(Sender: TObject);
+    begin
+        pesquisarRelatorios;
+    end;
+
+procedure TfrmGerRelatorios.FormCreate(Sender: TObject);
+    begin
+        qryRelatorios.Close;
+        pesquisarRelatorios;
+    end;
+
+procedure TfrmGerRelatorios.pesquisarRelatorios;
+    begin
+        qryRelatorios.Close;
+        with qryRelatorios do
+          begin
+             qryRelatorios.SQL.Clear;
+             qryRelatorios.SQL.Add('select  v.idVisita ');
+             qryRelatorios.SQL.Add('       ,v.tituloVisita ');
+             qryRelatorios.SQL.Add('       ,(v.mesVisita+'+QuotedStr('/')+'+CONVERT(varchar, v.anoVisita)) as dataVisita ');
+             qryRelatorios.SQL.Add('       ,g.nomeGrupo');
+             qryRelatorios.SQL.Add('from visita v      ');
+             qryRelatorios.SQL.Add('inner join grupo g on v.idGrupo=g.idGrupo');
+             qryRelatorios.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+             if cbxMes.ItemIndex<>0 then
+                begin
+                    case cbxMes.ItemIndex of
+                        1: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('JAN'));
+                        2: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('FEV'));
+                        3: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('MAR'));
+                        4: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('ABR'));
+                        5: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('MAI'));
+                        6: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('JUN'));
+                        7: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('JUL'));
+                        8: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('AGO'));
+                        9: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('SET'));
+                        10: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('OUT'));
+                        11: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('NOV'));
+                        12: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('DEZ'));
+                    end;
+                end;
+             if cbxAno.ItemIndex<>0 then
+                begin
+                    case cbxAno.ItemIndex of
+                       1: qryRelatorios.SQL.Add('and v.anoVisita='+inttostr(2019));
+                       2: qryRelatorios.SQL.Add('and v.anoVisita='+inttostr(2020));
+                    end;
+                end;
+              qryRelatorios.SQL.Add('order by v.dtVisita');
+          end;
+          qryRelatorios.Open;
+          lblTotal.Caption:='Total de relatórios:'+inttostr(qryRelatorios.RecordCount);
+          if qryRelatorios.RecordCount>0 then
+          begin
+            btnEdtRel.Enabled:=true;
+            btnExcluirRel.Enabled:=true;
+          end
+          else
+          begin
+             btnEdtRel.Enabled:=false;
+            btnExcluirRel.Enabled:=false;
+          end;
+    end;
+
+end.

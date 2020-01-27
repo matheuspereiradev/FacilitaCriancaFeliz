@@ -1,0 +1,132 @@
+unit UCadEdtCrianca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Data.DB,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmCadEdtCrianca = class(TForm)
+    lblTitulo: TLabel;
+    Label4: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    edtCodCrianca: TEdit;
+    edtNome: TEdit;
+    edtNIS: TEdit;
+    dtNasc: TDateTimePicker;
+    edtTerritorioCrianca: TEdit;
+    cbxGrupos: TComboBox;
+    btnSalvarCrianca: TButton;
+    Label6: TLabel;
+    qryCrianca: TADOQuery;
+    Label2: TLabel;
+    procedure carregarGrupos;
+    procedure btnSalvarCriancaClick(Sender: TObject);
+    procedure salvarNovaCrianca;
+  private
+    idCrianca:string;
+    operacao:char;
+  public
+    constructor Create(AOwner : TComponent; paramOP:char; paramId:string);
+  end;
+
+var
+  frmCadEdtCrianca: TfrmCadEdtCrianca;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+{ TfrmCadEdtCrianca }
+
+procedure TfrmCadEdtCrianca.btnSalvarCriancaClick(Sender: TObject);
+    begin
+        if operacao='c' then
+              begin
+                    try
+                      salvarNovaCrianca;
+                    except
+                       on e:exception do
+                       ShowMessage('Erro: '+e.Message);
+                    end;
+              end
+        else if operacao = 'e' then
+              begin
+                    try
+                       //salvarEdicaoGrupo;
+                    except
+                       on e:exception do
+                       ShowMessage('Erro: '+e.Message);
+                    end;
+              end
+    end;
+
+procedure TfrmCadEdtCrianca.carregarGrupos;
+var i:integer;
+    begin
+
+       qryCrianca.Close;
+       with qryCrianca do
+       begin
+         qryCrianca.SQL.Add('select g.idGrupo         ');
+         qryCrianca.SQL.Add('      ,g.nomeGrupo       ');
+         qryCrianca.SQL.Add('from grupo g             ');
+         qryCrianca.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+       end;
+       qryCrianca.Open;
+
+       i:=0;
+       while i<qryCrianca.RecordCount do
+       begin
+         cbxGrupos.Items.AddObject( qryCrianca.FieldByName('nomeGrupo').asString,
+          tObject(qryCrianca.FieldByName('idGrupo').asInteger) );
+         qryCrianca.Next;
+         i:=i+1;
+       end;
+       cbxGrupos.ItemIndex:=0;
+    end;
+
+constructor TfrmCadEdtCrianca.Create(AOwner: TComponent; paramOP: char;
+  paramId: string);
+    begin
+        inherited Create(AOwner);
+        operacao:=paramOP;
+        carregarGrupos;
+        if operacao='e' then
+          begin
+             idCrianca:=paramId;
+             edtCodCrianca.Text:=idCrianca;
+             lblTitulo.Caption:='Editar criança'
+          end;
+
+    end;
+
+procedure TfrmCadEdtCrianca.salvarNovaCrianca;
+    begin
+        qryCrianca.Close;
+        with qryCrianca do
+        begin
+          qryCrianca.SQL.Clear;
+          qryCrianca.SQL.Add('insert into crianca ');
+          qryCrianca.SQL.Add('(nomeCrianca,dtNascCrianca,nisCrianca,');
+          qryCrianca.SQL.Add('territorioCrianca,idGrupo)');
+          qryCrianca.SQL.Add('values ('+QuotedStr(edtNome.Text));
+          qryCrianca.SQL.Add(','+QuotedStr(DateToStr(dtNasc.Date)));
+          qryCrianca.SQL.Add(','+QuotedStr(edtNIS.text));
+          qryCrianca.SQL.Add(','+QuotedStr(edtTerritorioCrianca.text));
+          qryCrianca.SQL.Add(','+inttostr(Integer(cbxGrupos.items.objects[cbxGrupos.ItemIndex]))+')');
+        end;
+        if qryCrianca.ExecSQL=1 then
+          begin
+             ShowMessage('Cadastrado com sucesso');
+             frmCadEdtCrianca.Close;
+          end;
+    end;
+
+end.

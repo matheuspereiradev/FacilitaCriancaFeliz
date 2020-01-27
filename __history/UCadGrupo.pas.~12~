@@ -1,0 +1,102 @@
+unit UCadGrupo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB;
+
+type
+  TfrmCadEdtGrupo = class(TForm)
+    edtNomeGrupo: TEdit;
+    edtCodGrupo: TEdit;
+    Label4: TLabel;
+    Label1: TLabel;
+    lblTitulo: TLabel;
+    btnSalvarGrupo: TButton;
+    qryPesqGrupo: TADOQuery;
+    procedure pesquisarGrupo;
+    procedure btnSalvarGrupoClick(Sender: TObject);
+    procedure salvarNovoGrupo;
+  private
+    idGrupo:string;
+    operacao:char;
+  public
+    constructor Create(AOwner : TComponent; paramOP:char; paramId:string);
+  end;
+
+var
+  frmCadEdtGrupo: TfrmCadEdtGrupo;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+{ TfrmCadEdtGrupo }
+
+procedure TfrmCadEdtGrupo.btnSalvarGrupoClick(Sender: TObject);
+    begin
+        if operacao='c' then
+              begin
+                    try
+                       salvarNovoGrupo;
+                    except
+                       on e:exception do
+                       ShowMessage('Erro: '+e.Message);
+                    end;
+              end
+        else if operacao = 'e' then
+         // salvarEdicaoGrupo;
+    end;
+
+constructor TfrmCadEdtGrupo.Create(AOwner: TComponent; paramOP: char; paramId: string);
+      begin
+          inherited Create(AOwner);
+          operacao:=paramOP;
+          if operacao='e' then
+             begin
+                 idGrupo:=paramId;
+                 pesquisarGrupo;
+                 edtCodGrupo.Text:=idGrupo;
+                 edtNomeGrupo.Text:=qryPesqGrupo.FieldByName('nomeGrupo').AsString;
+                 lblTitulo.Caption:='Editar grupo';
+                 qryPesqGrupo.Close;
+             end
+      end;
+
+procedure TfrmCadEdtGrupo.pesquisarGrupo;
+    begin
+        qryPesqGrupo.Close;
+        with qryPesqGrupo do
+        begin
+          qryPesqGrupo.SQL.Clear;
+          qryPesqGrupo.SQL.Add('select g.nomeGrupo      ');
+          qryPesqGrupo.SQL.Add('from grupo g            ');
+          qryPesqGrupo.SQL.Add('where g.idGrupo='+idGrupo);
+          qryPesqGrupo.SQL.Add('order by g.nomeGrupo');
+        end;
+        qryPesqGrupo.Open;
+    end;
+
+procedure TfrmCadEdtGrupo.salvarNovoGrupo;
+    begin
+        qryPesqGrupo.Close;
+        with qryPesqGrupo do
+        begin
+          qryPesqGrupo.SQL.Clear;
+          qryPesqGrupo.SQL.Add('insert into grupo (nomeGrupo, idVisitador)');
+          qryPesqGrupo.SQL.Add('values ('+QuotedStr(edtNomeGrupo.Text));
+          qryPesqGrupo.SQL.Add(','+QuotedStr(frmMenu.idUsuario)+')');
+        end;
+        if qryPesqGrupo.ExecSQL=1 then
+          begin
+             ShowMessage('Cadastrado com sucesso');
+             frmCadEdtGrupo.Close;
+          end;
+
+
+    end;
+
+end.

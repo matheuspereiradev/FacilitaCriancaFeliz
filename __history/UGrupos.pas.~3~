@@ -1,0 +1,55 @@
+unit UGrupos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.DBGrids, Data.DB,
+  Data.Win.ADODB, Vcl.StdCtrls;
+
+type
+  TfrmGerGrupos = class(TForm)
+    Label4: TLabel;
+    Label1: TLabel;
+    qryPesquisarGrupos: TADOQuery;
+    dtsGrupos: TDataSource;
+    dbgGrupos: TDBGrid;
+    btnAtualizar: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btnAtualizarClick(Sender: TObject);
+    procedure PesquisarGrupos;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmGerGrupos: TfrmGerGrupos;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+procedure TfrmGerGrupos.btnAtualizarClick(Sender: TObject);
+    begin
+        PesquisarGrupos;
+    end;
+
+procedure TfrmGerGrupos.FormCreate(Sender: TObject);
+    begin
+        qryPesquisarGrupos.Close;
+    end;
+
+procedure TfrmGerGrupos.PesquisarGrupos;
+    begin
+        qryPesquisarGrupos.Close;
+         with qryPesquisarGrupos do
+          begin
+
+          end;
+    end;
+
+end.

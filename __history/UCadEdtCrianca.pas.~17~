@@ -1,0 +1,86 @@
+unit UCadEdtCrianca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Data.DB,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmCadEdtCrianca = class(TForm)
+    lblTitulo: TLabel;
+    Label4: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    edtCodCrianca: TEdit;
+    edtNome: TEdit;
+    edtNIS: TEdit;
+    dtNasc: TDateTimePicker;
+    edtTerritorioCrianca: TEdit;
+    cbxGrupos: TComboBox;
+    btnSalvarCrianca: TButton;
+    Label6: TLabel;
+    qryCrianca: TADOQuery;
+    procedure carregarGrupos;
+  private
+    idCrianca:string;
+    operacao:char;
+  public
+    constructor Create(AOwner : TComponent; paramOP:char; paramId:string);
+  end;
+
+var
+  frmCadEdtCrianca: TfrmCadEdtCrianca;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+{ TfrmCadEdtCrianca }
+
+procedure TfrmCadEdtCrianca.carregarGrupos;
+var i:integer;
+    begin
+
+       qryCrianca.Close;
+       with qryCrianca do
+       begin
+         qryCrianca.SQL.Add('select g.idGrupo         ');
+         qryCrianca.SQL.Add('      ,g.nomeGrupo       ');
+         qryCrianca.SQL.Add('from grupo g             ');
+         qryCrianca.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+       end;
+       qryCrianca.Open;
+
+       {qryCrianca.First;}
+       i:=0;
+       while i<qryCrianca.RecordCount do
+       begin
+         cbxGrupos.Items.AddObject( qryCrianca.FieldByName('nomeGrupo').asString,
+          tObject(qryCrianca.FieldByName('idGrupo').asInteger) );
+         qryCrianca.Next;
+         i:=i+1;
+       end;
+       cbxGrupos.ItemIndex:=0;
+    end;
+
+constructor TfrmCadEdtCrianca.Create(AOwner: TComponent; paramOP: char;
+  paramId: string);
+    begin
+        inherited Create(AOwner);
+        operacao:=paramOP;
+        carregarGrupos;
+        if operacao='e' then
+          begin
+             idCrianca:=paramId;
+             edtCodCrianca.Text:=idCrianca;
+             lblTitulo.Caption:='Editar criança'
+          end;
+
+    end;
+
+end.

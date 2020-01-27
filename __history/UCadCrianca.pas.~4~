@@ -1,0 +1,78 @@
+unit UCadCrianca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Data.DB,
+  Data.Win.ADODB;
+
+type
+  TfrmCadCrianca = class(TForm)
+    lblTitulo: TLabel;
+    edtCodCrianca: TEdit;
+    Label4: TLabel;
+    edtNome: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtNIS: TEdit;
+    dtNasc: TDateTimePicker;
+    Label3: TLabel;
+    Label5: TLabel;
+    edtTerritorioCrianca: TEdit;
+    Label6: TLabel;
+    cbxGrupos: TComboBox;
+    btnSalvarCrianca: TButton;
+    qryCriancas: TADOQuery;
+    procedure pesquisarGrupos;
+    procedure setarGrupos;
+  private
+    operacao:char;
+    idCrianca:string;
+  public
+    constructor Create(AOwner : TComponent; paramOP:char; paramId:string);
+  end;
+
+var
+  frmCadCrianca: TfrmCadCrianca;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+{ TfrmCadCrianca }
+
+constructor TfrmCadCrianca.Create(AOwner: TComponent; paramOP: char; paramId: string);
+    begin
+       setarGrupos;
+    end;
+
+procedure TfrmCadCrianca.pesquisarGrupos;
+    begin
+        qryCriancas.close;
+        with qryCriancas do
+          begin
+              qryCriancas.SQL.Clear;
+              qryCriancas.SQL.Add('select g.idGrupo         ');
+              qryCriancas.SQL.Add('      ,g.nomeGrupo       ');
+              qryCriancas.SQL.Add('from grupo g             ');
+              qryCriancas.SQL.Add('where g.idVisitador='+IntToStr(frmMenu.idUsuario));
+          end;
+        qryCriancas.open;
+    end;
+
+procedure TfrmCadCrianca.setarGrupos;
+    begin
+        pesquisarGrupos;
+       while not qryCriancas.Eof do
+         begin
+          cbxGrupos.Items.AddObject( Trim(qryCriancas.FieldByName('nomeGrupo').asString),
+          tObject(qryCriancas.FieldByName('idGrupo').asInteger) );
+          qryCriancas.Next;
+         end;
+       cbxGrupos.ItemIndex:=0
+    end;
+
+end.

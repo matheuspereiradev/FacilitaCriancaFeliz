@@ -1,0 +1,62 @@
+unit UImprimirRelatorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB;
+
+type
+  TfrmGerarRelatorio = class(TForm)
+    cbxCrianca: TComboBox;
+    cbxMes: TComboBox;
+    cbxAno: TComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnImprimirRelatorio: TButton;
+    lblTitulo: TLabel;
+    qryRelatorio: TADOQuery;
+    procedure FormCreate(Sender: TObject);
+    procedure pesquisarCriancas;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmGerarRelatorio: TfrmGerarRelatorio;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+procedure TfrmGerarRelatorio.FormCreate(Sender: TObject);
+    begin
+        pesquisarCriancas;
+    end;
+
+procedure TfrmGerarRelatorio.pesquisarCriancas;
+var i:integer;
+    begin
+        qryRelatorio.Close;
+        with   qryRelatorio do
+        begin
+          qryRelatorio.SQL.Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca from crianca c')
+        end;
+        qryRelatorio.Open;
+
+        i:=0;
+       while i<qryRelatorio.RecordCount do
+       begin
+         cbxCrianca.Items.AddObject( qryRelatorio.FieldByName('nomeGrupo').asString+'-'+qryRelatorio.FieldByName('territorioCrianca').asString,
+          tObject(qryRelatorio.FieldByName('idGrupo').asInteger) );
+         qryRelatorio.Next;
+         i:=i+1;
+       end;
+       cbxCrianca.ItemIndex:=0;
+    end;
+
+end.
