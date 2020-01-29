@@ -77,7 +77,7 @@ object frmLogin: TfrmLogin
     Top = 262
     Width = 56
     Height = 13
-    Caption = 'Vers'#227'o: 2.0'
+    Caption = 'Vers'#227'o: 2.1'
   end
   object Label6: TLabel
     Left = 464
@@ -1411,6 +1411,15 @@ object frmLogin: TfrmLogin
     ParentFont = False
     TabOrder = 3
     OnClick = btnFecharClick
+  end
+  object Button1: TButton
+    Left = 8
+    Top = 147
+    Width = 75
+    Height = 25
+    Caption = 'configurar'
+    TabOrder = 4
+    OnClick = Button1Click
   end
   object qryFazerLogin: TADOQuery
     Connection = frmMenu.conexao

@@ -14,7 +14,8 @@ uses
   UEntrarConfig in 'UEntrarConfig.pas' {frmEntrarConfig},
   UConfig in 'UConfig.pas' {frmConfig},
   UEdtSenha in 'UEdtSenha.pas' {frmEdtSenha},
-  uConnection in 'uConnection.pas';
+  uConnection in 'uConnection.pas',
+  uConfigCon in 'uConfigCon.pas' {frmConfuguraCon};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmConfuguraCon, frmConfuguraCon);
   Application.Run;
 end.

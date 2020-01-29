@@ -1,0 +1,52 @@
+unit uConfigCon;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfrmConfuguraCon = class(TForm)
+    edtUser: TEdit;
+    Label1: TLabel;
+    edtSenha: TEdit;
+    Label2: TLabel;
+    edtBanco: TEdit;
+    Label3: TLabel;
+    edtServidor: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    edtEstacao: TEdit;
+    btnSalvar: TButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConfuguraCon: TfrmConfuguraCon;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmConfuguraCon.FormCreate(Sender: TObject);
+var
+  ArqIni: TIniFile;
+begin
+  ArqIni := TIniFile.Create('C:\Users\mathe\Documents\RAD Studio\ProjetoCriancaFeliz 1.5\config.ini');
+  try
+    user := ArqIni.ReadString('Configuracoes', 'user', '');
+    senha:= ArqIni.ReadString('Configuracoes', 'senha', '');
+    banco:= ArqIni.ReadString('Configuracoes', 'banco', '');
+    servidor:= ArqIni.ReadString('Configuracoes', 'servidor', '');
+    NomeEstacao:= ArqIni.ReadString('Configuracoes', 'NomeEstacao', '');
+  finally
+    ArqIni.Free;
+  end;
+end;
+
+end.

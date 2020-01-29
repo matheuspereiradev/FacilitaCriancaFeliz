@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles;
 
 type
   TfrmMenu = class(TForm)
@@ -29,11 +29,17 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConfigClick(Sender: TObject);
     procedure conectarAoBanco;
+    procedure preencherVarBanco;
   private
     { Private declarations }
   public
     idUsuario:string;
     nnVersao:string;
+    var user: string;
+    var senha: string;
+    var banco: string;
+    var servidor:string;
+    var NomeEstacao:string;
   end;
 
 var
@@ -72,34 +78,30 @@ procedure TfrmMenu.btnRelatoriosClick(Sender: TObject);
     end;
 
 procedure TfrmMenu.conectarAoBanco;
-var user: string;
-var senha: string;
-var banco: string;
-var servidor:string;
-var NomeEstacao:string;
+ var con : string;
 begin
-  user:='sa';
-  senha:='sanmat9242';
-  banco:='crianca_feliz';
-  servidor:='MATHEUSLIMA\MATHEUSSQL';
-  NomeEstacao:='MATHEUSLIMA';
+  preencherVarBanco;
 
-  conexao.ConnectionString := 'Provider=SQLOLEDB.1;'+
-                                'Persist Security Info=True;'+
-                                'User ID='+user+';'+
-                                'Password='+senha+';'+
-                                'Initial Catalog='+banco+';'+
-                                'Data Source='+servidor+';'+
-                                'Auto Translate=True;'+
-                                'Packet Size=4096;'+
-                                'Workstation ID='+NomeEstacao+';'+
-                                'Network Library=DBMSSOCN';
+  con := 'Provider=SQLOLEDB.1;';
+  con := con + 'Persist Security Info=True;';
+  con := con + 'User ID='+user+';';
+  con := con + 'Password='+senha+';';
+  con := con + 'Initial Catalog='+banco+';';
+  con := con + 'Data Source='+servidor+';';
+  con := con + 'Auto Translate=True;';
+  con := con + 'Packet Size=4096;';
+  con := con + 'Workstation ID='+NomeEstacao+';';
+  con := con + 'Network Library=DBMSSOCN';
+
+
 
   try
+    conexao.Close;
+    conexao.ConnectionString:=con;
     conexao.Connected := true;
   except
     on e: Exception do
-    ShowMessage('Erro ao cenctar ao banco de dados');
+    ShowMessage('Erro ao conectar ao banco de dados');
   end;
 end;
 
@@ -118,7 +120,7 @@ procedure TfrmMenu.FormCreate(Sender: TObject);
     begin
 
     conectarAoBanco;
-    lblVersao.Caption:='V. 2.0';
+    lblVersao.Caption:='V. 2.1';
 
         idUsuario:='';
         while idUsuario='' do
@@ -129,5 +131,22 @@ procedure TfrmMenu.FormCreate(Sender: TObject);
        lblIdUsr.Caption:='IdUsr:.'+idUsuario;
        lblIdUsr.Font.Color:=clGreen;
     end;
+
+procedure TfrmMenu.preencherVarBanco;
+var
+  ArqIni: TIniFile;
+begin
+  ArqIni := TIniFile.Create('C:\CriancaFeliz\configPCF.ini');
+  try
+    user := ArqIni.ReadString('Configuracoes', 'user', '');
+    senha:= ArqIni.ReadString('Configuracoes', 'senha', '');
+    banco:= ArqIni.ReadString('Configuracoes', 'banco', '');
+    servidor:= ArqIni.ReadString('Configuracoes', 'servidor', '');
+    NomeEstacao:= ArqIni.ReadString('Configuracoes', 'NomeEstacao', '');
+  finally
+    ArqIni.Free;
+  end;
+end;
+
 
 end.

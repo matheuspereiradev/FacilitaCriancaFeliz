@@ -24,11 +24,13 @@ type
     Image3: TImage;
     Image4: TImage;
     btnFechar: TButton;
+    Button1: TButton;
     procedure btnEntrarClick(Sender: TObject);
     procedure fazerLogin;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnFecharClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses UMenu;
+uses UMenu, uConfigCon;
 
 procedure TfrmLogin.btnEntrarClick(Sender: TObject);
     begin
@@ -62,6 +64,12 @@ procedure TfrmLogin.btnFecharClick(Sender: TObject);
     begin
         Halt(0);
     end;
+
+procedure TfrmLogin.Button1Click(Sender: TObject);
+begin
+    frmConfuguraCon:=TfrmConfuguraCon.Create(self);
+    frmConfuguraCon.ShowModal;
+end;
 
 procedure TfrmLogin.fazerLogin;
     begin
