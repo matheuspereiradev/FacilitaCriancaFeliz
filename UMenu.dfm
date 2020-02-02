@@ -292,6 +292,7 @@ object frmMenu: TfrmMenu
     OnClick = btnConfigClick
   end
   object conexao: TADOConnection
+    ConnectOptions = coAsyncConnect
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 672

@@ -50,7 +50,7 @@ implementation
 {$R *.dfm}
 
 uses ULogin, UGrupos, UCriancas, UCadCrianca, UGerRelatorios,
-  UImprimirRelatorio, UEntrarConfig;
+  UImprimirRelatorio, UEntrarConfig, uConfigCon;
 
 procedure TfrmMenu.btnConfigClick(Sender: TObject);
     begin
@@ -83,25 +83,23 @@ begin
   preencherVarBanco;
 
   con := 'Provider=SQLOLEDB.1;';
-  con := con + 'Persist Security Info=True;';
-  con := con + 'User ID='+user+';';
-  con := con + 'Password='+senha+';';
+  con := con +'Integrated Security=SSPI;';
+  con := con + 'Persist Security Info=False;';
   con := con + 'Initial Catalog='+banco+';';
   con := con + 'Data Source='+servidor+';';
-  con := con + 'Auto Translate=True;';
-  con := con + 'Packet Size=4096;';
-  con := con + 'Workstation ID='+NomeEstacao+';';
-  con := con + 'Network Library=DBMSSOCN';
-
-
 
   try
     conexao.Close;
     conexao.ConnectionString:=con;
+    conexao.ConnectOptions:= coAsyncConnect;
     conexao.Connected := true;
   except
     on e: Exception do
-    ShowMessage('Erro ao conectar ao banco de dados');
+      begin
+          ShowMessage('erro na conexão com o banco de dados');
+          frmConfuguraCon:=TfrmConfuguraCon.Create(self);
+          frmConfuguraCon.Show;
+      end;
   end;
 end;
 

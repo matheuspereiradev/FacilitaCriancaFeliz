@@ -110,11 +110,9 @@ procedure TfrmGerCriancas.pesquisarCriancas;
         with qryCriancas do
           begin
               qryCriancas.SQL.Clear;
-              qryCriancas.SQL.Add('select c.idCrianca, c.nomeCrianca, DATEDIFF(YEAR,c.dtNascCrianca,GETDATE()) as idadeCrianca , c.nisCrianca, c.territorioCrianca');
-              qryCriancas.SQL.Add('	    ,g.nomeGrupo                       ');
-              qryCriancas.SQL.Add('from crianca c                           ');
-              qryCriancas.SQL.Add('inner join grupo g on g.idGrupo=c.idGrupo');
-              qryCriancas.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+              qryCriancas.SQL.Add('select *                                 ');
+              qryCriancas.SQL.Add('from vwCriancaGrupo c                    ');
+              qryCriancas.SQL.Add('where c.idVisitador='+frmMenu.idUsuario);
           end;
         qryCriancas.Open;
         lblTotalCriancas.Caption:= 'Total de crianças: '+IntToStr(qryCriancas.RecordCount);

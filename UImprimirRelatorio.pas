@@ -89,7 +89,9 @@ var i:integer;
         qryRelatorio.Close;
         with   qryRelatorio do
         begin
-          qryRelatorio.SQL.Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca from crianca c')
+          qryRelatorio.SQL.Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca from crianca c');
+          qryRelatorio.SQL.Add('inner join grupo g on c.idGrupo=g.idGrupo');
+          qryRelatorio.SQL.Add('where g.idVisitador='+quotedStr(frmMenu.idUsuario));
         end;
         qryRelatorio.Open;
 

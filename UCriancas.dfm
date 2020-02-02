@@ -368,7 +368,6 @@ object frmGerCriancas: TfrmGerCriancas
     OnClick = btnAtualizarClick
   end
   object qryCriancas: TADOQuery
-    Active = True
     Connection = frmMenu.conexao
     CursorType = ctStatic
     Parameters = <>
