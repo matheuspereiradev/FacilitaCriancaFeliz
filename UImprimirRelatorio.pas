@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB,
-  frxClass, frxDBSet, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  frxClass, frxDBSet, Vcl.Imaging.pngimage,DateUtils, Vcl.ExtCtrls;
 
 type
   TfrmGerarRelatorio = class(TForm)
@@ -16,16 +16,13 @@ type
     Label2: TLabel;
     btnImprimirRelatorio: TButton;
     lblTitulo: TLabel;
-    qryRelatorio: TADOQuery;
-    qryReport: TADOQuery;
-    dtsReport: TDataSource;
-    relatorio: TfrxReport;
-    dtsFrx: TfrxDBDataset;
     Image1: TImage;
+    qry: TADOQuery;
     procedure FormCreate(Sender: TObject);
     procedure pesquisarCriancas;
     procedure btnImprimirRelatorioClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+
   private
     { Private declarations }
   public
@@ -39,33 +36,16 @@ implementation
 
 {$R *.dfm}
 
-uses UMenu;
+uses UMenu, uSelVisitas;
 
 procedure TfrmGerarRelatorio.btnImprimirRelatorioClick(Sender: TObject);
     begin
       if (cbxMes.ItemIndex<>0) and (cbxAno.ItemIndex<>0) then
        begin
-        qryReport.Close;
-        with qryReport do
-        begin
-          qryReport.SQL.Clear;
-          qryReport.SQL.Add('select g.idGrupo,g.nomeGrupo');
-	        qryReport.SQL.Add(',v.idVisita,v.acolhimento,v.desenvolvimento,v.momentoFinal,v.objetivo, v.mesVisita,v.anoVisita');
-	        qryReport.SQL.Add(',c.nomeCrianca,c.nisCrianca,c.dtNascCrianca, C.territorioCrianca');
-	        qryReport.SQL.Add(',DATEDIFF(YEAR,c.dtNascCrianca,GETDATE()) as idadeCrianca');
-	        qryReport.SQL.Add(',s.nomeSupervisor');
-	        qryReport.SQL.Add(',vi.nomeVisitador');
-          qryReport.SQL.Add('from grupo g');
-          qryReport.SQL.Add('inner join visita v on v.idGrupo=g.idGrupo');
-          qryReport.SQL.Add('inner join crianca c on g.idGrupo=c.idGrupo');
-          qryReport.SQL.Add('inner join visitador vi on g.idVisitador=vi.idVisitador');
-          qryReport.SQL.Add('inner join supervisor s on vi.idSupervisor=s.idSupervisor');
-          qryReport.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
-          qryReport.SQL.Add('and c.idCrianca='+inttostr(Integer(cbxCrianca.items.objects[cbxCrianca.ItemIndex])));
-          qryReport.SQL.Add('and v.mesVisita='+QuotedStr(cbxMes.Text));
-          qryReport.SQL.Add('and v.anoVisita='+QuotedStr(cbxAno.Text));
-       end;
-       relatorio.ShowReport;
+
+       frmSelecionarRel:=TfrmSelecionarRel.Create(self,cbxAno.Text,cbxMes.Text,inttostr(Integer(cbxCrianca.items.objects[cbxCrianca.ItemIndex])));
+       frmSelecionarRel.ShowModal;
+
       end
       else
         ShowMessage('Escolha o mes e ano');
@@ -80,27 +60,36 @@ end;
 
 procedure TfrmGerarRelatorio.FormCreate(Sender: TObject);
     begin
+       cbxMes.ItemIndex:=monthOf(Date());
+       if yearOf(date())=2020 then
+        cbxAno.ItemIndex:=2;
+
+
+
         pesquisarCriancas;
     end;
+
 
 procedure TfrmGerarRelatorio.pesquisarCriancas;
 var i:integer;
     begin
-        qryRelatorio.Close;
-        with   qryRelatorio do
+        qry.Close;
+        with   qry.SQL do
         begin
-          qryRelatorio.SQL.Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca from crianca c');
-          qryRelatorio.SQL.Add('inner join grupo g on c.idGrupo=g.idGrupo');
-          qryRelatorio.SQL.Add('where g.idVisitador='+quotedStr(frmMenu.idUsuario));
+          clear;
+          Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca from crianca c');
+          Add('inner join grupo g on c.idGrupo=g.idGrupo                            ');
+          Add('where g.idVisitador=                    '+quotedStr(frmMenu.idUsuario));
         end;
-        qryRelatorio.Open;
+
+        qry.Open;
 
         i:=0;
-       while i<qryRelatorio.RecordCount do
+       while i<qry.RecordCount do
        begin
-         cbxCrianca.Items.AddObject( qryRelatorio.FieldByName('nomeCrianca').asString+'-'+qryRelatorio.FieldByName('territorioCrianca').asString,
-          tObject(qryRelatorio.FieldByName('idCrianca').asInteger) );
-         qryRelatorio.Next;
+         cbxCrianca.Items.AddObject( qry.FieldByName('nomeCrianca').asString+'-'+qry.FieldByName('territorioCrianca').asString,
+          tObject(qry.FieldByName('idCrianca').asInteger) );
+         qry.Next;
          i:=i+1;
        end;
        cbxCrianca.ItemIndex:=0;

@@ -158,17 +158,18 @@ procedure TfrmCadEdtCrianca.salvarEdicaoCrianca;
 procedure TfrmCadEdtCrianca.salvarNovaCrianca;
     begin
         qryCrianca.Close;
-        with qryCrianca do
+        with qryCrianca.SQL do
         begin
-          qryCrianca.SQL.Clear;
-          qryCrianca.SQL.Add('insert into crianca ');
-          qryCrianca.SQL.Add('(nomeCrianca,dtNascCrianca,nisCrianca,');
-          qryCrianca.SQL.Add('territorioCrianca,idGrupo)');
-          qryCrianca.SQL.Add('values ('+QuotedStr(edtNome.Text));
-          qryCrianca.SQL.Add(','+QuotedStr(DateToStr(dtNasc.Date)));
-          qryCrianca.SQL.Add(','+QuotedStr(edtNIS.text));
-          qryCrianca.SQL.Add(','+QuotedStr(edtTerritorioCrianca.text));
-          qryCrianca.SQL.Add(','+inttostr(Integer(cbxGrupos.items.objects[cbxGrupos.ItemIndex]))+')');
+          Clear;
+          Add('insert into crianca ');
+          Add('(nomeCrianca,dtNascCrianca,nisCrianca,');
+          Add('territorioCrianca,idGrupo,idVisitador)');
+          Add('values ('+QuotedStr(edtNome.Text));
+          Add(','+QuotedStr(DateToStr(dtNasc.Date)));
+          Add(','+QuotedStr(edtNIS.text));
+          Add(','+QuotedStr(edtTerritorioCrianca.text));
+          Add(','+inttostr(Integer(cbxGrupos.items.objects[cbxGrupos.ItemIndex])));
+          Add(','+frmMenu.idUsuario+')')
         end;
         if qryCrianca.ExecSQL=1 then
           begin

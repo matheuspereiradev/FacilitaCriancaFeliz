@@ -15,7 +15,8 @@ uses
   UConfig in 'UConfig.pas' {frmConfig},
   UEdtSenha in 'UEdtSenha.pas' {frmEdtSenha},
   uConnection in 'uConnection.pas',
-  uConfigCon in 'uConfigCon.pas' {frmConfuguraCon};
+  uConfigCon in 'uConfigCon.pas' {frmConfuguraCon},
+  uSelVisitas in 'uSelVisitas.pas' {frmSelecionarRel};
 
 {$R *.res}
 
@@ -23,6 +24,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmConfuguraCon, frmConfuguraCon);
   Application.Run;
 end.

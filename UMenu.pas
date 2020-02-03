@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles;
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles, Clipbrd;
 
 type
   TfrmMenu = class(TForm)
@@ -21,7 +21,6 @@ type
     btnConfig: TButton;
     Image1: TImage;
     lblVersao: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure btnGerGruposClick(Sender: TObject);
     procedure btnGerCriancaClick(Sender: TObject);
     procedure btnRelatoriosClick(Sender: TObject);
@@ -30,11 +29,14 @@ type
     procedure btnConfigClick(Sender: TObject);
     procedure conectarAoBanco;
     procedure preencherVarBanco;
+    function pegaSQL(qry: TADOQuery):string;
+
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     idUsuario:string;
-    nnVersao:string;
+    const nnVersao:string='3.0';
     var user: string;
     var senha: string;
     var banco: string;
@@ -114,11 +116,11 @@ begin
     Action := caFree;
 end;
 
-procedure TfrmMenu.FormCreate(Sender: TObject);
-    begin
 
+procedure TfrmMenu.FormCreate(Sender: TObject);
+begin
     conectarAoBanco;
-    lblVersao.Caption:='V. 2.1';
+    lblVersao.Caption:='V. '+nnVersao;
 
         idUsuario:='';
         while idUsuario='' do
@@ -128,7 +130,13 @@ procedure TfrmMenu.FormCreate(Sender: TObject);
           end;
        lblIdUsr.Caption:='IdUsr:.'+idUsuario;
        lblIdUsr.Font.Color:=clGreen;
-    end;
+end;
+
+function TfrmMenu.pegaSQL(qry: TADOQuery): string;
+begin
+   Clipboard.AsText := qry.SQL.GetText;
+   Result :='Copiado para área de tranferência';
+end;
 
 procedure TfrmMenu.preencherVarBanco;
 var

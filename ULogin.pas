@@ -17,7 +17,7 @@ type
     edtSenha: TMaskEdit;
     Label3: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
+    lblVersao: TLabel;
     Label6: TLabel;
     Image1: TImage;
     Image2: TImage;
@@ -93,6 +93,7 @@ procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 procedure TfrmLogin.FormCreate(Sender: TObject);
     begin
         qryFazerLogin.Close;
+        lblVersao.Caption:='Versão'+frmMenu.nnVersao;
     end;
 
 end.

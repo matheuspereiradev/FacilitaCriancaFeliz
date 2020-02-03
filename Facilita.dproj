@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>Facilita.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -147,6 +147,10 @@
         <DCCReference Include="uConnection.pas"/>
         <DCCReference Include="uConfigCon.pas">
             <Form>frmConfuguraCon</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uSelVisitas.pas">
+            <Form>frmSelecionarRel</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
