@@ -5,7 +5,7 @@ object frmSelecionarRel: TfrmSelecionarRel
   Caption = 'Selecione as visitas'
   ClientHeight = 429
   ClientWidth = 369
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -93,11 +93,11 @@ object frmSelecionarRel: TfrmSelecionarRel
       end
       item
         Name = 'mes'
-        Value = ''
+        Value = Null
       end
       item
         Name = 'ano'
-        Value = ''
+        Value = Null
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -129,7 +129,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object dtsFrxobjetivo: TfrxMemoView
           Left = 18.897650000000000000
           Top = 23.015770000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -145,7 +145,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo3: TfrxMemoView
           Left = 18.897650000000000000
           Top = 41.913420000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           DataField = 'objetivo'
@@ -163,7 +163,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo5: TfrxMemoView
           Left = 18.897650000000000000
           Top = 61.708720000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -179,7 +179,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo6: TfrxMemoView
           Left = 18.897650000000000000
           Top = 80.606370000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           DataField = 'acolhimento'
@@ -197,7 +197,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo8: TfrxMemoView
           Left = 18.897650000000000000
           Top = 100.401670000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -213,7 +213,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo9: TfrxMemoView
           Left = 18.897650000000000000
           Top = 119.299320000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           DataField = 'desenvolvimento'
@@ -231,7 +231,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo11: TfrxMemoView
           Left = 18.897650000000000000
           Top = 138.960730000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -247,7 +247,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo12: TfrxMemoView
           Left = 18.897650000000000000
           Top = 157.858380000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           DataField = 'momentoFinal'
@@ -265,7 +265,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo14: TfrxMemoView
           Left = 18.897650000000000000
           Top = 177.976500000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -281,7 +281,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo15: TfrxMemoView
           Left = 18.897650000000000000
           Top = 196.874150000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -295,7 +295,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo16: TfrxMemoView
           Left = 18.897650000000000000
           Top = 215.771800000000000000
-          Width = 430.866420000000000000
+          Width = 480.000310000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
           Font.Charset = DEFAULT_CHARSET
@@ -309,7 +309,7 @@ object frmSelecionarRel: TfrmSelecionarRel
         object Memo17: TfrxMemoView
           Left = 124.724490000000000000
           Top = 2.559060000000000000
-          Width = 245.669450000000000000
+          Width = 294.803340000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack

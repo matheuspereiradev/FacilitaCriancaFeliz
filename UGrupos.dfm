@@ -5,7 +5,7 @@ object frmGerGrupos: TfrmGerGrupos
   Caption = 'Grupos'
   ClientHeight = 528
   ClientWidth = 490
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

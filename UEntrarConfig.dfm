@@ -5,7 +5,7 @@ object frmEntrarConfig: TfrmEntrarConfig
   Caption = 'Entrar'
   ClientHeight = 79
   ClientWidth = 292
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

@@ -4,7 +4,7 @@ object frmConfuguraCon: TfrmConfuguraCon
   Caption = 'Configurar conex'#227'o'
   ClientHeight = 286
   ClientWidth = 250
-  Color = clBtnFace
+  Color = clGreen
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

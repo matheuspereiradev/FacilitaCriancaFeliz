@@ -5,7 +5,7 @@ object frmCadEdtGrupo: TfrmCadEdtGrupo
   Caption = 'Cadastrar/editar grupo'
   ClientHeight = 216
   ClientWidth = 361
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

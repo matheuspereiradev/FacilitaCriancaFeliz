@@ -4,7 +4,7 @@ object frmCadRelatorio: TfrmCadRelatorio
   Caption = 'Cadastrar/editar relat'#243'rio'
   ClientHeight = 649
   ClientWidth = 784
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

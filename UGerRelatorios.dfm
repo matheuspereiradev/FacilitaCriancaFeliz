@@ -5,7 +5,7 @@ object frmGerRelatorios: TfrmGerRelatorios
   Caption = 'Gerenciar Relat'#243'rios'
   ClientHeight = 517
   ClientWidth = 704
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

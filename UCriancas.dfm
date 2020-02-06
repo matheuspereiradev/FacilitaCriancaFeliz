@@ -5,7 +5,7 @@ object frmGerCriancas: TfrmGerCriancas
   Caption = 'Gerenciar crian'#231'as'
   ClientHeight = 599
   ClientWidth = 756
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles, Clipbrd,Dateutils, Vcl.Menus;
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles, Clipbrd,Dateutils, Vcl.Menus,
+  dxGDIPlusClasses;
 
 type
   TfrmMenu = class(TForm)
@@ -15,7 +16,6 @@ type
     btnGerGrupos: TButton;
     btnGerCrianca: TButton;
     Label4: TLabel;
-    Label3: TLabel;
     btnRelatorios: TButton;
     edtGeraRelatorios: TButton;
     btnConfig: TButton;
@@ -35,6 +35,7 @@ type
     btnadm: TMenuItem;
     Acessar1: TMenuItem;
     Login1: TMenuItem;
+    Image2: TImage;
     procedure btnGerGruposClick(Sender: TObject);
     procedure btnGerCriancaClick(Sender: TObject);
     procedure btnRelatoriosClick(Sender: TObject);
@@ -196,7 +197,7 @@ begin
               frmLogin.ShowModal;
           end;
 
-       lblIdUsr.Font.Color:=clGreen;
+       lblIdUsr.Font.Color:=clBlack;
         verificarPermissoes;
        //lblNome.Caption:=volte('select nomeVisitador from visitador where idVisitador='+idUsuario,'nomeVisitador')
 end;

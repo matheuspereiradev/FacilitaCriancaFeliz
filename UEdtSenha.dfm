@@ -5,7 +5,7 @@ object frmEdtSenha: TfrmEdtSenha
   Caption = 'Editar senha'
   ClientHeight = 161
   ClientWidth = 303
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

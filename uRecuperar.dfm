@@ -4,7 +4,7 @@ object frmRecuperar: TfrmRecuperar
   Caption = 'Recuperar'
   ClientHeight = 462
   ClientWidth = 731
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

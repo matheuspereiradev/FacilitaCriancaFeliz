@@ -5,7 +5,7 @@ object frmCadEdtCrianca: TfrmCadEdtCrianca
   Caption = 'Cadastrar\editar crian'#231'a'
   ClientHeight = 388
   ClientWidth = 416
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

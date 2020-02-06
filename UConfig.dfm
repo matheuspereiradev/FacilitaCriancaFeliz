@@ -5,7 +5,7 @@ object frmConfig: TfrmConfig
   Caption = 'Configura'#231#245'es'
   ClientHeight = 240
   ClientWidth = 296
-  Color = clBtnFace
+  Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
