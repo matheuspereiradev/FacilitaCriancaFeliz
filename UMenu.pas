@@ -67,6 +67,7 @@ type
     var servidor:string;
     var NomeEstacao:string;
     procedure verificarPermissoes;
+    procedure restaurarBancoDeDados;
     function volte (sql:String;campo: string):string;
   end;
 
@@ -79,7 +80,7 @@ implementation
 
 uses ULogin, UGrupos, UCriancas, UCadCrianca, UGerRelatorios,
   UImprimirRelatorio, UEntrarConfig, uConfigCon, uScriptSQL, uConsSQL,
-  uVisitador, uRecuperar;
+  uVisitador, uRecuperar, uGeral;
 
 procedure TfrmMenu.Acessar1Click(Sender: TObject);
 begin
@@ -194,7 +195,7 @@ begin
               frmLogin:=TfrmLogin.Create(self);
               frmLogin.ShowModal;
           end;
-       lblIdUsr.Caption:='IdUsr:.'+idUsuario;
+
        lblIdUsr.Font.Color:=clGreen;
         verificarPermissoes;
        //lblNome.Caption:=volte('select nomeVisitador from visitador where idVisitador='+idUsuario,'nomeVisitador')
@@ -233,6 +234,11 @@ procedure TfrmMenu.Propriedadesdaconexo1Click(Sender: TObject);
 begin
     frmConfuguraCon:=TfrmConfuguraCon.Create(self);
     frmConfuguraCon.ShowModal;
+end;
+
+procedure TfrmMenu.restaurarBancoDeDados;
+begin
+
 end;
 
 procedure TfrmMenu.Restaurarcrianas1Click(Sender: TObject);

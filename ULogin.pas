@@ -52,6 +52,7 @@ procedure TfrmLogin.btnEntrarClick(Sender: TObject);
         if qryFazerLogin.RecordCount=1 then
           begin
               frmMenu.idUsuario:=qryFazerLogin.FieldByName('idVisitador').AsString;
+              frmMenu.lblIdUsr.Caption:='IdUsr:.'+frmMenu.idUsuario;
               frmLogin.Close;
           end
         else

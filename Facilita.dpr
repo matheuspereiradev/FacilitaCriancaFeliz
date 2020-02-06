@@ -20,7 +20,8 @@ uses
   uScriptSQL in 'uScriptSQL.pas' {frmExecScript},
   uConsSQL in 'uConsSQL.pas' {frmConsSQL},
   uVisitador in 'uVisitador.pas' {frmVisitador},
-  uRecuperar in 'uRecuperar.pas' {frmRecuperar};
+  uRecuperar in 'uRecuperar.pas' {frmRecuperar},
+  uGeral in 'uGeral.pas';
 
 {$R *.res}
 

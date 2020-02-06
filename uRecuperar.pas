@@ -118,6 +118,7 @@ begin
     begin
       clear;
       add('select * from crianca where dtExcluido is not null');
+      add('and idVisitador='+frmMenu.idUsuario);
     end;
     qryRec.Open;
 end;
@@ -129,6 +130,7 @@ begin
     begin
       clear;
       add('select * from grupo where dtExcluido is not null');
+      add('and idVisitador='+frmMenu.idUsuario);
     end;
     qryRec.Open;
 end;
@@ -140,6 +142,7 @@ begin
     begin
       clear;
       add('select * from visita where dtExcluido is not null');
+      add('and idVisitador='+frmMenu.idUsuario);
     end;
     qryRec.Open;
 end;

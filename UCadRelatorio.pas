@@ -230,7 +230,7 @@ procedure TfrmCadRelatorio.salvarNovoRelatorio;
                  with qryRelatorio do
                     begin
                       qryRelatorio.SQL.Clear;
-                      qryRelatorio.SQL.Add('insert into visita (tituloVisita, dtVisita, objetivo, acolhimento,desenvolvimento,momentoFinal, idGrupo,mesVisita,anoVisita)');
+                      qryRelatorio.SQL.Add('insert into visita (tituloVisita, dtVisita, objetivo, acolhimento,desenvolvimento,momentoFinal, idGrupo,mesVisita,anoVisita,idVisitador)');
                       qryRelatorio.SQL.Add('values ('+ QuotedStr(edtTitulo.Text));
                       qryRelatorio.SQL.Add(', GETDATE()');
                       qryRelatorio.SQL.Add(','+ QuotedStr(edtObjetivo.Lines.GetText));
@@ -239,7 +239,8 @@ procedure TfrmCadRelatorio.salvarNovoRelatorio;
                       qryRelatorio.SQL.Add(','+ QuotedStr(edtMomentoFinal.Lines.GetText));
                       qryRelatorio.SQL.Add(','+inttostr(Integer(cbxGrupos.items.objects[cbxGrupos.ItemIndex])));
                       qryRelatorio.SQL.Add(','+ QuotedStr(cbxMes.Text));
-                      qryRelatorio.SQL.Add(','+ cbxAno.Text+')');
+                      qryRelatorio.SQL.Add(','+ cbxAno.Text);
+                      qryRelatorio.SQL.Add(','+frmMenu.idUsuario+')')
                     end;
                  if qryRelatorio.ExecSQL=1 then
                     begin
