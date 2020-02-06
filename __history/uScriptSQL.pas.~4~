@@ -1,0 +1,51 @@
+unit uScriptSQL;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.Win.ADODB;
+
+type
+  TForm1 = class(TForm)
+    edtScript: TMemo;
+    btnExec: TButton;
+    ADOCommand1: TADOCommand;
+    procedure btnExecClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure executarSQL;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+procedure TForm1.btnExecClick(Sender: TObject);
+begin
+    executarSQL;
+end;
+
+procedure TForm1.executarSQL;
+    var ADOCommand : TADOCommand;
+
+begin
+
+    ADOCommand := TADOCommand.Create(nil); //Cria o objeto de comando para executar a rotina de backup do SQL SERVER 2000
+    with ADOCommand do begin
+    //ADOCommand.Name := 'ADOGeraBackup'; //Nome do objeto
+    ADOCommand.ConnectionString := frmMenu.conexao.ConnectionString; //Cria a conexão com o Provider do SQL Server
+    //ADOCommand.CommandType := cmdText; //Define como command Text para execução de linhas de comando
+    ADOCommand.CommandText := 'BACKUP DATABASE '+banco+' TO DISK =''c:\CriancaFeliz\Backup\crianca_feliz '+data+'.bak''';
+    ADOCommand.Execute; //Executa a linha de comando
+  end;
+end;
+
+end.

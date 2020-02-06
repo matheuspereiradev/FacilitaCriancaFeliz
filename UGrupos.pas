@@ -81,7 +81,7 @@ var botaoSelecionado:integer;
               with qryGrupos do
                 begin
                   qryGrupos.SQL.Clear;
-                  qryGrupos.SQL.Add('delete grupo');
+                  qryGrupos.SQL.Add('UPDATE grupo set dtExcluido=getDate()');
                   qryGrupos.SQL.Add('where idGrupo='+dbgGrupos.DataSource.DataSet.FieldByName('idGrupo').AsString);
                 end;
               if qryGrupos.ExecSQL=1 then
@@ -106,13 +106,15 @@ procedure TfrmGerGrupos.FormCreate(Sender: TObject);
 procedure TfrmGerGrupos.PesquisarGrupos;
     begin
         qryPesquisarGrupos.Close;
-         with qryPesquisarGrupos do
+         with qryPesquisarGrupos.SQL do
           begin
-              qryPesquisarGrupos.SQL.Clear;
-              qryPesquisarGrupos.SQL.Add('select g.idGrupo         ');
-              qryPesquisarGrupos.SQL.Add('      ,g.nomeGrupo       ');
-              qryPesquisarGrupos.SQL.Add('from grupo g             ');
-              qryPesquisarGrupos.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+              Clear;
+              Add('select g.idGrupo         ');
+              Add('      ,g.nomeGrupo       ');
+              Add('from grupo g             ');
+              Add('where g.idVisitador='+frmMenu.idUsuario);
+              Add('and dtExcluido is null');
+
           end;
          qryPesquisarGrupos.Open;
          lblTotal.Caption:='Total de grupos: '+IntToStr(qryPesquisarGrupos.RecordCount);

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles, Clipbrd;
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles, Clipbrd,Dateutils, Vcl.Menus;
 
 type
   TfrmMenu = class(TForm)
@@ -21,6 +21,20 @@ type
     btnConfig: TButton;
     Image1: TImage;
     lblVersao: TLabel;
+    MainMenu1: TMainMenu;
+    Bancodedados1: TMenuItem;
+    Fazerbackup1: TMenuItem;
+    Restaurarbackup: TMenuItem;
+    Executarscript: TMenuItem;
+    ExecutarconsultaSQL1: TMenuItem;
+    Propriedadesdaconexo1: TMenuItem;
+    Restaurar1: TMenuItem;
+    Restaurargrupos1: TMenuItem;
+    Restaurarcrianas1: TMenuItem;
+    Restaurarrelatrios1: TMenuItem;
+    btnadm: TMenuItem;
+    Acessar1: TMenuItem;
+    Login1: TMenuItem;
     procedure btnGerGruposClick(Sender: TObject);
     procedure btnGerCriancaClick(Sender: TObject);
     procedure btnRelatoriosClick(Sender: TObject);
@@ -29,19 +43,31 @@ type
     procedure btnConfigClick(Sender: TObject);
     procedure conectarAoBanco;
     procedure preencherVarBanco;
+    procedure fazerBackUp;
     function pegaSQL(qry: TADOQuery):string;
 
     procedure FormCreate(Sender: TObject);
+    procedure Propriedadesdaconexo1Click(Sender: TObject);
+    procedure Fazerbackup1Click(Sender: TObject);
+    procedure ExecutarscriptClick(Sender: TObject);
+    procedure ExecutarconsultaSQL1Click(Sender: TObject);
+    procedure Acessar1Click(Sender: TObject);
+    procedure Login1Click(Sender: TObject);
+    procedure Restaurargrupos1Click(Sender: TObject);
+    procedure Restaurarcrianas1Click(Sender: TObject);
+    procedure Restaurarrelatrios1Click(Sender: TObject);
   private
     { Private declarations }
   public
     idUsuario:string;
-    const nnVersao:string='3.0';
+    const nnVersao:string='4.0';
     var user: string;
     var senha: string;
     var banco: string;
     var servidor:string;
     var NomeEstacao:string;
+    procedure verificarPermissoes;
+    function volte (sql:String;campo: string):string;
   end;
 
 var
@@ -52,7 +78,14 @@ implementation
 {$R *.dfm}
 
 uses ULogin, UGrupos, UCriancas, UCadCrianca, UGerRelatorios,
-  UImprimirRelatorio, UEntrarConfig, uConfigCon;
+  UImprimirRelatorio, UEntrarConfig, uConfigCon, uScriptSQL, uConsSQL,
+  uVisitador, uRecuperar;
+
+procedure TfrmMenu.Acessar1Click(Sender: TObject);
+begin
+    frmVisitador:=TfrmVisitador.create(self);
+    frmVisitador.Show;
+end;
 
 procedure TfrmMenu.btnConfigClick(Sender: TObject);
     begin
@@ -111,9 +144,42 @@ procedure TfrmMenu.edtGeraRelatoriosClick(Sender: TObject);
         frmGerarRelatorio.ShowModal;
     end;
 
+procedure TfrmMenu.ExecutarconsultaSQL1Click(Sender: TObject);
+begin
+    frmConsSQL:=TfrmConsSQL.Create(self);
+    frmConsSQL.ShowModal;
+end;
+
+procedure TfrmMenu.ExecutarscriptClick(Sender: TObject);
+begin
+     frmExecScript:=TfrmExecScript.Create(self);
+     frmExecScript.ShowModal;
+end;
+
+procedure TfrmMenu.fazerBackUp;
+var ADOCommand : TADOCommand;
+    data:string;
+begin
+    data:=FormatDateTime('dd-mm-yyyy',Date());
+    ADOCommand := TADOCommand.Create(nil); //Cria o objeto de comando para executar a rotina de backup do SQL SERVER 2000
+    with ADOCommand do begin
+    //ADOCommand.Name := 'ADOGeraBackup'; //Nome do objeto
+    ADOCommand.ConnectionString := conexao.ConnectionString; //Cria a conexão com o Provider do SQL Server
+    //ADOCommand.CommandType := cmdText; //Define como command Text para execução de linhas de comando
+    ADOCommand.CommandText := 'BACKUP DATABASE '+banco+' TO DISK =''c:\CriancaFeliz\Backup\crianca_feliz '+data+'.bak''';
+    ADOCommand.Execute; //Executa a linha de comando
+  end;
+end;
+
+procedure TfrmMenu.Fazerbackup1Click(Sender: TObject);
+begin
+    fazerBackUp ;
+end;
+
 procedure TfrmMenu.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     Action := caFree;
+    fazerBackUp;
 end;
 
 
@@ -130,6 +196,14 @@ begin
           end;
        lblIdUsr.Caption:='IdUsr:.'+idUsuario;
        lblIdUsr.Font.Color:=clGreen;
+        verificarPermissoes;
+       //lblNome.Caption:=volte('select nomeVisitador from visitador where idVisitador='+idUsuario,'nomeVisitador')
+end;
+
+procedure TfrmMenu.Login1Click(Sender: TObject);
+begin
+frmlogin:=TfrmLogin.Create(self);
+frmLogin.ShowModal;
 end;
 
 function TfrmMenu.pegaSQL(qry: TADOQuery): string;
@@ -154,5 +228,56 @@ begin
   end;
 end;
 
+
+procedure TfrmMenu.Propriedadesdaconexo1Click(Sender: TObject);
+begin
+    frmConfuguraCon:=TfrmConfuguraCon.Create(self);
+    frmConfuguraCon.ShowModal;
+end;
+
+procedure TfrmMenu.Restaurarcrianas1Click(Sender: TObject);
+begin
+    frmRecuperar:=TfrmRecuperar.Create(self,'c');
+    frmRecuperar.ShowModal;
+end;
+
+procedure TfrmMenu.Restaurargrupos1Click(Sender: TObject);
+begin
+    frmRecuperar:=TfrmRecuperar.Create(self,'g');
+    frmRecuperar.ShowModal;
+end;
+
+procedure TfrmMenu.Restaurarrelatrios1Click(Sender: TObject);
+begin
+    frmRecuperar:=TfrmRecuperar.Create(self,'v');
+    frmRecuperar.ShowModal;
+end;
+
+procedure TfrmMenu.verificarPermissoes;
+var permissao:string;
+begin
+    permissao:=volte('select intTag from visitador where idVisitador='+idUsuario,'intTag');
+    if StrToInt(permissao)=0 then
+    begin
+      btnadm.Visible:=false;
+      Executarscript.Enabled:=false;
+      Restaurarbackup.Enabled:=false;
+    end;
+
+end;
+
+function TfrmMenu.volte(sql: String; campo: string): string;
+var qryVolte: TADOQuery;
+    resultado:string;
+begin
+    qryVolte:=TADOQuery.Create(nil);
+    qryVolte.Connection:=conexao;
+    qryVolte.SQL.Add(sql);
+    qryVolte.Open;
+    resultado:=qryVolte.FieldByName(campo).AsString;
+    qryVolte.Close;
+
+    result:= resultado;
+end;
 
 end.

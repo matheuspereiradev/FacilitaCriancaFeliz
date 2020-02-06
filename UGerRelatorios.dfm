@@ -243,7 +243,6 @@ object frmGerRelatorios: TfrmGerRelatorios
     Left = 544
   end
   object qryRelatorios: TADOQuery
-    Active = True
     Connection = frmMenu.conexao
     CursorType = ctStatic
     Parameters = <>

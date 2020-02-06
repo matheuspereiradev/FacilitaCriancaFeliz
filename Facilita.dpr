@@ -16,7 +16,11 @@ uses
   UEdtSenha in 'UEdtSenha.pas' {frmEdtSenha},
   uConnection in 'uConnection.pas',
   uConfigCon in 'uConfigCon.pas' {frmConfuguraCon},
-  uSelVisitas in 'uSelVisitas.pas' {frmSelecionarRel};
+  uSelVisitas in 'uSelVisitas.pas' {frmSelecionarRel},
+  uScriptSQL in 'uScriptSQL.pas' {frmExecScript},
+  uConsSQL in 'uConsSQL.pas' {frmConsSQL},
+  uVisitador in 'uVisitador.pas' {frmVisitador},
+  uRecuperar in 'uRecuperar.pas' {frmRecuperar};
 
 {$R *.res}
 
@@ -24,5 +28,9 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmExecScript, frmExecScript);
+  Application.CreateForm(TfrmConsSQL, frmConsSQL);
+  Application.CreateForm(TfrmVisitador, frmVisitador);
+  Application.CreateForm(TfrmRecuperar, frmRecuperar);
   Application.Run;
 end.

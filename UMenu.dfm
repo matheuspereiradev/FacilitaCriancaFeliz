@@ -11,6 +11,7 @@ object frmMenu: TfrmMenu
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
@@ -302,5 +303,60 @@ object frmMenu: TfrmMenu
     Parameters = <>
     Left = 624
     Top = 56
+  end
+  object MainMenu1: TMainMenu
+    Left = 40
+    Top = 24
+    object Bancodedados1: TMenuItem
+      Caption = 'Banco de dados'
+      object Fazerbackup1: TMenuItem
+        Caption = 'Fazer backup'
+        OnClick = Fazerbackup1Click
+      end
+      object Restaurarbackup: TMenuItem
+        Tag = 1
+        Caption = 'Restaurar backup'
+      end
+      object Executarscript: TMenuItem
+        Tag = 1
+        Caption = 'Executar script'
+        OnClick = ExecutarscriptClick
+      end
+      object ExecutarconsultaSQL1: TMenuItem
+        Caption = 'Executar consulta SQL'
+        OnClick = ExecutarconsultaSQL1Click
+      end
+      object Propriedadesdaconexo1: TMenuItem
+        Caption = 'Propriedades da conex'#227'o'
+        OnClick = Propriedadesdaconexo1Click
+      end
+    end
+    object Restaurar1: TMenuItem
+      Caption = 'Restaurar'
+      object Restaurargrupos1: TMenuItem
+        Caption = 'Restaurar grupos'
+        OnClick = Restaurargrupos1Click
+      end
+      object Restaurarcrianas1: TMenuItem
+        Caption = 'Restaurar crian'#231'as'
+        OnClick = Restaurarcrianas1Click
+      end
+      object Restaurarrelatrios1: TMenuItem
+        Caption = 'Restaurar relat'#243'rios'
+        OnClick = Restaurarrelatrios1Click
+      end
+    end
+    object btnadm: TMenuItem
+      Tag = 1
+      Caption = 'Administrativo'
+      object Acessar1: TMenuItem
+        Caption = 'Acessar'
+        OnClick = Acessar1Click
+      end
+    end
+    object Login1: TMenuItem
+      Caption = 'Login'
+      OnClick = Login1Click
+    end
   end
 end

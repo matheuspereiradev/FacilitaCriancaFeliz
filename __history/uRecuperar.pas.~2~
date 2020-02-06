@@ -1,0 +1,31 @@
+unit uRecuperar;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls;
+
+type
+  TfrmRecuperar = class(TForm)
+    Label1: TLabel;
+    dbRec: TDBGrid;
+    qryRec: TADOQuery;
+    DataSource1: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRecuperar: TfrmRecuperar;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+end.

@@ -1386,7 +1386,6 @@ object frmLogin: TfrmLogin
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    Text = 'marge'
   end
   object edtSenha: TMaskEdit
     Left = 123
@@ -1401,7 +1400,7 @@ object frmLogin: TfrmLogin
     ParentFont = False
     PasswordChar = '*'
     TabOrder = 2
-    Text = '123'
+    Text = ''
   end
   object btnFechar: TButton
     Left = 278

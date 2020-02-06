@@ -81,7 +81,7 @@ var botaoSelecionado:integer;
               with qryOperacoesCrianca do
                 begin
                   qryOperacoesCrianca.SQL.Clear;
-                  qryOperacoesCrianca.SQL.Add('delete crianca');
+                  qryOperacoesCrianca.SQL.Add('update crianca set dtExcluido = getdate()');
                   qryOperacoesCrianca.SQL.Add('where idCrianca='+dbgCriancas.DataSource.DataSet.FieldByName('idCrianca').AsString);
                 end;
               if qryOperacoesCrianca.ExecSQL=1 then
@@ -107,12 +107,12 @@ procedure TfrmGerCriancas.FormCreate(Sender: TObject);
 procedure TfrmGerCriancas.pesquisarCriancas;
     begin
         qryCriancas.Close;
-        with qryCriancas do
+        with qryCriancas.SQL do
           begin
-              qryCriancas.SQL.Clear;
-              qryCriancas.SQL.Add('select *                                 ');
-              qryCriancas.SQL.Add('from vwCriancaGrupo c                    ');
-              qryCriancas.SQL.Add('where c.idVisitador='+frmMenu.idUsuario);
+              Clear;
+              Add('select *                                 ');
+              Add('from vwCriancaGrupo c                    ');
+              Add('where c.idVisitador='+frmMenu.idUsuario);
           end;
         qryCriancas.Open;
         lblTotalCriancas.Caption:= 'Total de crianças: '+IntToStr(qryCriancas.RecordCount);

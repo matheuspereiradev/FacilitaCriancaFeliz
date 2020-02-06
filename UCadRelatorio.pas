@@ -76,12 +76,13 @@ procedure TfrmCadRelatorio.carregarGrupos;
 var i:integer;
     begin
         qryRelatorio.Close;
-       with qryRelatorio do
+       with qryRelatorio.SQL do
        begin
-         qryRelatorio.SQL.Add('select g.idGrupo         ');
-         qryRelatorio.SQL.Add('      ,g.nomeGrupo       ');
-         qryRelatorio.SQL.Add('from grupo g             ');
-         qryRelatorio.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+         Add('select g.idGrupo         ');
+         Add('      ,g.nomeGrupo       ');
+         Add('from grupo g             ');
+         Add('where g.idVisitador='+frmMenu.idUsuario);
+         Add('and dtExcluido is null');
        end;
        qryRelatorio.Open;
 

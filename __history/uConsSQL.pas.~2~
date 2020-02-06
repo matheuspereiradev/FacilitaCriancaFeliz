@@ -1,0 +1,31 @@
+unit uConsSQL;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.DBGrids, Data.DB,
+  Data.Win.ADODB, Vcl.StdCtrls;
+
+type
+  TfrmConsSQL = class(TForm)
+    Memo1: TMemo;
+    qrySQL: TADOQuery;
+    dtsSQL: TDataSource;
+    DBGrid1: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConsSQL: TfrmConsSQL;
+
+implementation
+
+{$R *.dfm}
+
+uses UMenu;
+
+end.

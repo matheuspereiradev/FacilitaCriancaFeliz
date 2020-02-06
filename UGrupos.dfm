@@ -333,7 +333,6 @@ object frmGerGrupos: TfrmGerGrupos
     OnClick = btnExcluirGrupoClick
   end
   object qryPesquisarGrupos: TADOQuery
-    Active = True
     Connection = frmMenu.conexao
     CursorType = ctStatic
     Parameters = <>
@@ -351,7 +350,6 @@ object frmGerGrupos: TfrmGerGrupos
     Top = 8
   end
   object qryGrupos: TADOQuery
-    Active = True
     Connection = frmMenu.conexao
     CursorType = ctStatic
     Parameters = <>

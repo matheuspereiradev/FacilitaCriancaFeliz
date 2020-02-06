@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.CheckLst, Data.DB,
-  Data.Win.ADODB, frxClass, frxDBSet,Clipbrd;
+  Data.Win.ADODB, frxClass, frxDBSet,Clipbrd, frxExportPDF, frxExportDOCX,
+  frxExportMail;
 
 type
   TfrmSelecionarRel = class(TForm)
@@ -20,6 +21,9 @@ type
     qryRelatorio: TADOQuery;
     qryReport: TADOQuery;
     Label1: TLabel;
+    frxToPDF: TfrxPDFExport;
+    frxToDOC: TfrxDOCXExport;
+    frxMailExport1: TfrxMailExport;
     procedure carregaOpcoes;
     procedure btnImprimirClick(Sender: TObject);
   private
@@ -67,29 +71,29 @@ end;
 procedure TfrmSelecionarRel.montaVisitas;
 var i:integer;
 begin
-          qryReport.Close;
-          with qryReport.SQL do
-          begin
-              Clear;
-              Add('select *                              ');
-              Add('from vwVisitaRel v                    ');
-              Add('where v.idVisitador='+frmMenu.idUsuario);
-              Add('and v.mesVisita='+QuotedStr(nmMes)     );
-              Add('and v.anoVisita='+QuotedStr(nmAno)     );
-              Add('and v.idVisita in (0                  ');
+    qryReport.Close;
+    with qryReport.SQL do
+    begin
+        Clear;
+        Add('select *                              ');
+        Add('from vwVisitaRel v                    ');
+        Add('where v.idVisitador='+frmMenu.idUsuario);
+        Add('and v.mesVisita='+QuotedStr(nmMes)     );
+        Add('and v.anoVisita='+QuotedStr(nmAno)     );
+        Add('and v.idVisita in (0                  ');
 
-              i:=0;
-              for i := 0 to cblRelatorios.Count-1 do
-              begin
-                if cblRelatorios.Checked[i] then
-                  begin
-                     add(','+inttostr(Integer(cblRelatorios.items.objects[i])));
-                  end;
-              end;
+        i:=0;
+        for i := 0 to cblRelatorios.Count-1 do
+        begin
+          if cblRelatorios.Checked[i] then
+            begin
+               add(','+inttostr(Integer(cblRelatorios.items.objects[i])));
+            end;
+        end;
 
-              add(')');
-           end;
-           qryReport.Open;
+        add(')');
+     end;
+     qryReport.Open;
 end;
 
 
@@ -104,6 +108,7 @@ begin
           Add('where v.idVisitador='+quotedStr(frmMenu.idUsuario));
           add('and mesVisita = '+quotedStr(nmMes));
           add('and anoVisita = '+quotedStr(nmAno));
+
           add('order by v.nomeGrupo ');
         end;
         qryVisitas.Open;
@@ -127,7 +132,6 @@ begin
     nmMes:=mes;
     codCrianca:=idCrianca;
     carregaOpcoes;
-
 end;
 
 end.

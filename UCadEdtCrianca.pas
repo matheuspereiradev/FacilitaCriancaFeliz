@@ -92,12 +92,13 @@ procedure TfrmCadEdtCrianca.carregarGrupos;
 var i:integer;
     begin
        qryCrianca.Close;
-       with qryCrianca do
+       with qryCrianca.SQL do
        begin
-         qryCrianca.SQL.Add('select g.idGrupo         ');
-         qryCrianca.SQL.Add('      ,g.nomeGrupo       ');
-         qryCrianca.SQL.Add('from grupo g             ');
-         qryCrianca.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+         Add('select g.idGrupo         ');
+         Add('      ,g.nomeGrupo       ');
+         Add('from grupo g             ');
+         Add('where g.idVisitador='+frmMenu.idUsuario);
+         Add('and dtExcluido is null');
        end;
        qryCrianca.Open;
 

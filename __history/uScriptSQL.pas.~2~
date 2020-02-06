@@ -1,0 +1,38 @@
+unit uScriptSQL;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    edtScript: TMemo;
+    btnExec: TButton;
+    procedure btnExecClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure executarSQL;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnExecClick(Sender: TObject);
+begin
+    executarSQL;
+end;
+
+procedure TForm1.executarSQL;
+begin
+
+end;
+
+end.

@@ -98,7 +98,7 @@ var botaoSelecionado:integer;
               with qryOperacoesRelatorio do
                 begin
                   qryOperacoesRelatorio.SQL.Clear;
-                  qryOperacoesRelatorio.SQL.Add('delete visita');
+                  qryOperacoesRelatorio.SQL.Add('update visita set dtExcluido=getdate()');
                   qryOperacoesRelatorio.SQL.Add('where idVisita='+dbgRelatorios.DataSource.DataSet.FieldByName('idVisita').AsString);
                 end;
               if qryOperacoesRelatorio.ExecSQL=1 then
@@ -125,31 +125,32 @@ procedure TfrmGerRelatorios.FormCreate(Sender: TObject);
 procedure TfrmGerRelatorios.pesquisarRelatorios;
     begin
         qryRelatorios.Close;
-        with qryRelatorios do
+        with qryRelatorios.SQL do
           begin
-             qryRelatorios.SQL.Clear;
-             qryRelatorios.SQL.Add('select  v.idVisita ');
-             qryRelatorios.SQL.Add('       ,v.tituloVisita ');
-             qryRelatorios.SQL.Add('       ,(v.mesVisita+'+QuotedStr('/')+'+CONVERT(varchar, v.anoVisita)) as dataVisita ');
-             qryRelatorios.SQL.Add('       ,g.nomeGrupo');
-             qryRelatorios.SQL.Add('from visita v      ');
-             qryRelatorios.SQL.Add('inner join grupo g on v.idGrupo=g.idGrupo');
-             qryRelatorios.SQL.Add('where g.idVisitador='+frmMenu.idUsuario);
+             Clear;
+             Add('select  v.idVisita ');
+             Add('       ,v.tituloVisita ');
+             Add('       ,(v.mesVisita+'+QuotedStr('/')+'+CONVERT(varchar, v.anoVisita)) as dataVisita ');
+             Add('       ,g.nomeGrupo');
+             Add('from visita v      ');
+             Add('inner join grupo g on v.idGrupo=g.idGrupo');
+             Add('where g.idVisitador='+frmMenu.idUsuario);
+             add('and v.dtExcluido is null');
              if cbxMes.ItemIndex<>0 then
                 begin
                     case cbxMes.ItemIndex of
-                        1: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('JAN'));
-                        2: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('FEV'));
-                        3: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('MAR'));
-                        4: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('ABR'));
-                        5: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('MAI'));
-                        6: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('JUN'));
-                        7: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('JUL'));
-                        8: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('AGO'));
-                        9: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('SET'));
-                        10: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('OUT'));
-                        11: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('NOV'));
-                        12: qryRelatorios.SQL.Add('and v.mesVisita='+QuotedStr('DEZ'));
+                        1: Add('and v.mesVisita='+QuotedStr('JAN'));
+                        2: Add('and v.mesVisita='+QuotedStr('FEV'));
+                        3: Add('and v.mesVisita='+QuotedStr('MAR'));
+                        4: Add('and v.mesVisita='+QuotedStr('ABR'));
+                        5: Add('and v.mesVisita='+QuotedStr('MAI'));
+                        6: Add('and v.mesVisita='+QuotedStr('JUN'));
+                        7: Add('and v.mesVisita='+QuotedStr('JUL'));
+                        8: Add('and v.mesVisita='+QuotedStr('AGO'));
+                        9: Add('and v.mesVisita='+QuotedStr('SET'));
+                        10:Add('and v.mesVisita='+QuotedStr('OUT'));
+                        11:Add('and v.mesVisita='+QuotedStr('NOV'));
+                        12:Add('and v.mesVisita='+QuotedStr('DEZ'));
                     end;
                 end;
              if cbxAno.ItemIndex<>0 then

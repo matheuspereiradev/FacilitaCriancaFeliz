@@ -63,9 +63,6 @@ procedure TfrmGerarRelatorio.FormCreate(Sender: TObject);
        cbxMes.ItemIndex:=monthOf(Date());
        if yearOf(date())=2020 then
         cbxAno.ItemIndex:=2;
-
-
-
         pesquisarCriancas;
     end;
 
@@ -77,9 +74,9 @@ var i:integer;
         with   qry.SQL do
         begin
           clear;
-          Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca from crianca c');
-          Add('inner join grupo g on c.idGrupo=g.idGrupo                            ');
-          Add('where g.idVisitador=                    '+quotedStr(frmMenu.idUsuario));
+          Add('select c.idCrianca, c.nomeCrianca, c.territorioCrianca');
+          Add('from vwCriancaGrupo c                                 ');
+          Add('where c.idVisitador=     '+quotedStr(frmMenu.idUsuario));
         end;
 
         qry.Open;
