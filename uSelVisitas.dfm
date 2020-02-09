@@ -13,6 +13,7 @@ object frmSelecionarRel: TfrmSelecionarRel
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -40,13 +41,16 @@ object frmSelecionarRel: TfrmSelecionarRel
     Left = 103
     Top = 388
     Width = 171
-    Height = 36
+    Height = 37
     Caption = 'IMPRIMIR'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 17
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 1
     OnClick = btnImprimirClick
@@ -57,8 +61,8 @@ object frmSelecionarRel: TfrmSelecionarRel
     Parameters = <>
     SQL.Strings = (
       'SELECT * from vwVisitaResumo')
-    Left = 144
-    Top = 368
+    Left = 280
+    Top = 312
   end
   object relatorio: TfrxReport
     Version = '5.3.13'

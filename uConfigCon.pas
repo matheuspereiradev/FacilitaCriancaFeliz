@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,IniFiles;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,IniFiles, dxGDIPlusClasses,
+  Vcl.ExtCtrls;
 
 type
   TfrmConfuguraCon = class(TForm)
@@ -19,6 +20,10 @@ type
     Label5: TLabel;
     edtEstacao: TEdit;
     btnSalvar: TButton;
+    lblTitulo: TLabel;
+    Image1: TImage;
+    edtSerialKey: TEdit;
+    Label6: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
   private
@@ -45,6 +50,7 @@ begin
     ArqIni.WriteString('Configuracoes', 'banco', edtBanco.Text);
     ArqIni.WriteString('Configuracoes', 'servidor', edtServidor.Text);
     ArqIni.WriteString('Configuracoes', 'NomeEstacao', edtEstacao.Text);
+    ArqIni.WriteString('Chave', 'chaveDeAtivacao', edtSerialKey.Text);
   finally
     ArqIni.Free;
     ShowMessage('Será necessário reiniciar o programa!');
@@ -64,6 +70,7 @@ begin
     edtBanco.Text:= ArqIni.ReadString('Configuracoes', 'banco', '');
     edtServidor.Text:= ArqIni.ReadString('Configuracoes', 'servidor', '');
     edtEstacao.Text:= ArqIni.ReadString('Configuracoes', 'NomeEstacao', '');
+    edtSerialKey.Text:= ArqIni.ReadString('Chave', 'chaveDeAtivacao', '');
   finally
     ArqIni.Free;
   end;

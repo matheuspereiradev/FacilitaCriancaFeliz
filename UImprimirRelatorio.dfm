@@ -3,7 +3,7 @@ object frmGerarRelatorio: TfrmGerarRelatorio
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Gerar relat'#243'rios'
-  ClientHeight = 225
+  ClientHeight = 226
   ClientWidth = 353
   Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
@@ -160,10 +160,10 @@ object frmGerarRelatorio: TfrmGerarRelatorio
       '2020')
   end
   object btnImprimirRelatorio: TButton
-    Left = 124
-    Top = 182
-    Width = 121
-    Height = 35
+    Left = 93
+    Top = 175
+    Width = 164
+    Height = 43
     Cursor = crHandPoint
     Caption = 'Selecionar visitas'
     Font.Charset = ANSI_CHARSET
@@ -171,6 +171,8 @@ object frmGerarRelatorio: TfrmGerarRelatorio
     Font.Height = -13
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 14
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 3
     OnClick = btnImprimirRelatorioClick

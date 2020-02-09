@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Data.DB,
-  Data.Win.ADODB;
+  Data.Win.ADODB, dxGDIPlusClasses, Vcl.ExtCtrls;
 
 type
   TfrmEdtSenha = class(TForm)
@@ -15,6 +15,7 @@ type
     Label2: TLabel;
     Button1: TButton;
     qrySenha: TADOQuery;
+    Image1: TImage;
     procedure Button1Click(Sender: TObject);
     procedure salvarSenha;
   private

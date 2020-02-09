@@ -4,7 +4,7 @@ object frmGerRelatorios: TfrmGerRelatorios
   BorderIcons = [biSystemMenu]
   Caption = 'Gerenciar Relat'#243'rios'
   ClientHeight = 517
-  ClientWidth = 704
+  ClientWidth = 721
   Color = clMenuHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmGerRelatorios: TfrmGerRelatorios
   TextHeight = 13
   object lblTitulo: TLabel
     Left = 288
-    Top = 4
+    Top = 2
     Width = 175
     Height = 22
     Caption = 'Gerenciar relat'#243'rio'
@@ -31,9 +31,9 @@ object frmGerRelatorios: TfrmGerRelatorios
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 391
-    Top = 58
-    Width = 28
+    Left = 458
+    Top = 59
+    Width = 27
     Height = 16
     Caption = 'M'#234's:'
     Font.Charset = DEFAULT_CHARSET
@@ -44,9 +44,9 @@ object frmGerRelatorios: TfrmGerRelatorios
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 498
-    Top = 57
-    Width = 27
+    Left = 547
+    Top = 59
+    Width = 26
     Height = 16
     Caption = 'Ano:'
     Font.Charset = DEFAULT_CHARSET
@@ -57,15 +57,21 @@ object frmGerRelatorios: TfrmGerRelatorios
     ParentFont = False
   end
   object lblTotal: TLabel
-    Left = 578
-    Top = 491
-    Width = 100
+    Left = 579
+    Top = 487
+    Width = 117
     Height = 13
     Caption = 'Total de relat'#243'rios: 0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object Label24343: TLabel
     Left = 256
-    Top = 28
+    Top = 26
     Width = 225
     Height = 13
     Caption = 'Clique duas vezes para obter mais informa'#231#245'es'
@@ -73,7 +79,7 @@ object frmGerRelatorios: TfrmGerRelatorios
   object dbgRelatorios: TDBGrid
     Left = 8
     Top = 88
-    Width = 688
+    Width = 707
     Height = 393
     DataSource = dtsRelatorio
     TabOrder = 0
@@ -135,58 +141,64 @@ object frmGerRelatorios: TfrmGerRelatorios
   end
   object btnCadRelatorio: TButton
     Left = 8
-    Top = 47
-    Width = 121
-    Height = 35
+    Top = 40
+    Width = 139
+    Height = 42
     Cursor = crHandPoint
     Caption = 'Criar relat'#243'rio'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 7
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 1
     OnClick = btnCadRelatorioClick
   end
   object btnEdtRel: TButton
-    Left = 135
-    Top = 47
-    Width = 121
-    Height = 35
+    Left = 149
+    Top = 40
+    Width = 146
+    Height = 42
     Cursor = crHandPoint
     Caption = 'Editar relat'#243'rio'
     Enabled = False
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 9
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 2
     OnClick = btnEdtRelClick
   end
   object btnExcluirRel: TButton
-    Left = 262
-    Top = 47
-    Width = 121
-    Height = 35
+    Left = 297
+    Top = 40
+    Width = 159
+    Height = 42
     Cursor = crHandPoint
     Caption = 'Excluir relat'#243'rio'
     Enabled = False
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 3
     OnClick = btnExcluirRelClick
   end
   object cbxMes: TComboBox
-    Left = 422
-    Top = 53
-    Width = 73
+    Left = 488
+    Top = 54
+    Width = 54
     Height = 21
     ItemIndex = 0
     TabOrder = 4
@@ -207,9 +219,9 @@ object frmGerRelatorios: TfrmGerRelatorios
       'DEZ')
   end
   object cbxAno: TComboBox
-    Left = 527
-    Top = 53
-    Width = 75
+    Left = 576
+    Top = 54
+    Width = 57
     Height = 21
     ItemIndex = 0
     TabOrder = 5
@@ -220,21 +232,37 @@ object frmGerRelatorios: TfrmGerRelatorios
       '2020')
   end
   object btnPesquisar: TButton
-    Left = 608
+    Left = 639
     Top = 48
-    Width = 88
+    Width = 74
     Height = 28
     Cursor = crHandPoint
-    Caption = 'Pesquisar'
+    Caption = 'buscar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ImageIndex = 12
+    Images = frmMenu.cxImageList1
+    ParentFont = False
     TabOrder = 6
     OnClick = btnPesquisarClick
   end
   object Button1: TButton
     Left = 8
     Top = 485
-    Width = 88
+    Width = 97
     Height = 28
     Caption = 'Atualizar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ImageIndex = 13
+    Images = frmMenu.cxImageList1
+    ParentFont = False
     TabOrder = 7
     OnClick = Button1Click
   end

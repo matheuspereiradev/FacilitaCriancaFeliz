@@ -190,17 +190,20 @@ object frmCadEdtCrianca: TfrmCadEdtCrianca
     Text = 'Nenhum grupo'
   end
   object btnSalvarCrianca: TButton
-    Left = 152
-    Top = 346
-    Width = 129
-    Height = 33
+    Left = 128
+    Top = 336
+    Width = 153
+    Height = 43
     Cursor = crHandPoint
-    Caption = 'Salvar'
+    Caption = 'SALVAR'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 5
+    ImageMargins.Left = 10
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 6
     OnClick = btnSalvarCriancaClick

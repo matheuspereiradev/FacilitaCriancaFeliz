@@ -19,7 +19,7 @@ object frmGerGrupos: TfrmGerGrupos
   TextHeight = 13
   object Label1: TLabel
     Left = 202
-    Top = 9
+    Top = 17
     Width = 119
     Height = 22
     Caption = 'Seus grupos'
@@ -29,13 +29,6 @@ object frmGerGrupos: TfrmGerGrupos
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     ParentFont = False
-  end
-  object Label24343: TLabel
-    Left = 152
-    Top = 37
-    Width = 225
-    Height = 13
-    Caption = 'Clique duas vezes para obter mais informa'#231#245'es'
   end
   object lblTotal: TLabel
     Left = 379
@@ -243,6 +236,7 @@ object frmGerGrupos: TfrmGerGrupos
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -278,17 +272,25 @@ object frmGerGrupos: TfrmGerGrupos
   object btnAtualizar: TButton
     Left = 16
     Top = 495
-    Width = 75
-    Height = 25
+    Width = 97
+    Height = 27
     Caption = 'Atualizar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ImageIndex = 13
+    Images = frmMenu.cxImageList1
+    ParentFont = False
     TabOrder = 1
     OnClick = btnAtualizarClick
   end
   object btnNovoGrupo: TButton
     Left = 16
-    Top = 80
+    Top = 81
     Width = 129
-    Height = 33
+    Height = 41
     Cursor = crHandPoint
     Caption = 'Novo'
     Font.Charset = ANSI_CHARSET
@@ -296,15 +298,18 @@ object frmGerGrupos: TfrmGerGrupos
     Font.Height = -13
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 6
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 2
     OnClick = btnNovoGrupoClick
   end
   object btnEditarGrupo: TButton
     Left = 182
-    Top = 80
+    Top = 81
     Width = 129
-    Height = 33
+    Height = 41
     Cursor = crHandPoint
     Caption = 'Editar'
     Font.Charset = ANSI_CHARSET
@@ -312,15 +317,18 @@ object frmGerGrupos: TfrmGerGrupos
     Font.Height = -13
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 10
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 3
     OnClick = btnEditarGrupoClick
   end
   object btnExcluirGrupo: TButton
     Left = 344
-    Top = 80
+    Top = 81
     Width = 129
-    Height = 33
+    Height = 41
     Cursor = crHandPoint
     Caption = 'Excluir'
     Font.Charset = ANSI_CHARSET
@@ -328,6 +336,9 @@ object frmGerGrupos: TfrmGerGrupos
     Font.Height = -13
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 8
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 4
     OnClick = btnExcluirGrupoClick

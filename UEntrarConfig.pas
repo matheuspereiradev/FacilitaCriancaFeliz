@@ -12,6 +12,7 @@ type
     Button1: TButton;
     qryAbrirConfig: TADOQuery;
     edtSenha: TMaskEdit;
+    Label1: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure verificarSenha;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

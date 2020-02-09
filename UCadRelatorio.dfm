@@ -170,17 +170,20 @@ object frmCadRelatorio: TfrmCadRelatorio
       '2020')
   end
   object btnSalvarRelatorio: TButton
-    Left = 339
-    Top = 606
-    Width = 159
-    Height = 38
+    Left = 328
+    Top = 600
+    Width = 170
+    Height = 44
     Cursor = crHandPoint
-    Caption = 'Salvar'
+    Caption = 'SALVAR'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 5
+    ImageMargins.Left = 5
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 4
     OnClick = btnSalvarRelatorioClick

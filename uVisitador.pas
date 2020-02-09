@@ -24,6 +24,12 @@ type
     Button1: TButton;
     qryAux: TADOQuery;
     Button2: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
     procedure dbgVisDblClick(Sender: TObject);
     procedure tbCadastroShow(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -68,7 +74,7 @@ begin
        clear;
        add('UPDATE visitador SET');
        add('loginVisitador='+QuotedStr(edtLogin.Text));
-       add(', senhaVisitador='+QuotedStr(edtSenha.Text));
+       add(', senhaVisitador='+QuotedStr(frmMenu.encriptar(edtSenha.Text)));
        add(', flAtivo='+inttostr(cbStatus.ItemIndex));
        add(',cpfVisitador='+QuotedStr(edtCPF.Text));
        add(',nomeVisitador='+QuotedStr(edtNome.Text));
@@ -84,7 +90,7 @@ begin
        clear;
        add('insert into visitador (loginVisitador,senhaVisitador,flAtivo,cpfVisitador,nomeVisitador,idSupervisor) ');
        add('values('+QuotedStr(edtLogin.Text));
-       add(','+QuotedStr(edtSenha.Text));
+       add(','+QuotedStr(frmMenu.encriptar(edtSenha.Text)));
        add(','+inttostr(cbStatus.ItemIndex));
        add(','+QuotedStr(edtCPF.Text));
        add(','+QuotedStr(edtNome.Text));

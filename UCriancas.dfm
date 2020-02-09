@@ -38,7 +38,7 @@ object frmGerCriancas: TfrmGerCriancas
     Caption = 'Total de crian'#231'as: 00'
   end
   object Image1: TImage
-    Left = 552
+    Left = 584
     Top = 16
     Width = 65
     Height = 65
@@ -111,7 +111,7 @@ object frmGerCriancas: TfrmGerCriancas
       81315097E2AB0F0000000049454E44AE426082}
   end
   object Image2: TImage
-    Left = 615
+    Left = 647
     Top = 16
     Width = 58
     Height = 65
@@ -220,48 +220,57 @@ object frmGerCriancas: TfrmGerCriancas
   end
   object btnCadCrianca: TButton
     Left = 8
-    Top = 63
+    Top = 56
     Width = 129
-    Height = 33
+    Height = 40
     Cursor = crHandPoint
     Caption = 'Novo'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 6
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 0
     OnClick = btnCadCriancaClick
   end
   object btnEdtCrianca: TButton
     Left = 160
-    Top = 63
+    Top = 56
     Width = 129
-    Height = 33
+    Height = 40
     Cursor = crHandPoint
     Caption = 'Editar'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 10
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 1
     OnClick = btnEdtCriancaClick
   end
   object btnExcCriancas: TButton
     Left = 312
-    Top = 63
+    Top = 56
     Width = 129
-    Height = 33
+    Height = 40
     Cursor = crHandPoint
     Caption = 'Excluir'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 8
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 2
     OnClick = btnExcCriancasClick
@@ -361,9 +370,17 @@ object frmGerCriancas: TfrmGerCriancas
   object btnAtualizar: TButton
     Left = 8
     Top = 569
-    Width = 75
-    Height = 25
+    Width = 96
+    Height = 29
     Caption = 'Atualizar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ImageIndex = 13
+    Images = frmMenu.cxImageList1
+    ParentFont = False
     TabOrder = 4
     OnClick = btnAtualizarClick
   end

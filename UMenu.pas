@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, IniFiles, Clipbrd,Dateutils, Vcl.Menus,
-  dxGDIPlusClasses;
+  dxGDIPlusClasses, Vcl.ImgList, cxGraphics, IdHashMessageDigest, EAppProt,
+  JvComponentBase, JvSerialMaker;
 
 type
   TfrmMenu = class(TForm)
@@ -36,6 +37,8 @@ type
     Acessar1: TMenuItem;
     Login1: TMenuItem;
     Image2: TImage;
+    opdAbrirBackUp: TOpenDialog;
+    cxImageList1: TcxImageList;
     procedure btnGerGruposClick(Sender: TObject);
     procedure btnGerCriancaClick(Sender: TObject);
     procedure btnRelatoriosClick(Sender: TObject);
@@ -57,11 +60,12 @@ type
     procedure Restaurargrupos1Click(Sender: TObject);
     procedure Restaurarcrianas1Click(Sender: TObject);
     procedure Restaurarrelatrios1Click(Sender: TObject);
+    procedure RestaurarbackupClick(Sender: TObject);
   private
     { Private declarations }
   public
     idUsuario:string;
-    const nnVersao:string='4.0';
+    const nnVersao:string='4.2';
     var user: string;
     var senha: string;
     var banco: string;
@@ -70,6 +74,7 @@ type
     procedure verificarPermissoes;
     procedure restaurarBancoDeDados;
     function volte (sql:String;campo: string):string;
+    function encriptar(texto:string):string;
   end;
 
 var
@@ -145,6 +150,18 @@ procedure TfrmMenu.edtGeraRelatoriosClick(Sender: TObject);
         frmGerarRelatorio:=TfrmGerarRelatorio.Create(self);
         frmGerarRelatorio.ShowModal;
     end;
+
+function TfrmMenu.encriptar(texto: string): string;
+var
+    idmd5 : TIdHashMessageDigest5;
+begin
+    idmd5 := TIdHashMessageDigest5.Create;
+  try
+    result := idmd5.HashStringAsHex(texto);
+  finally
+    idmd5.Free;
+  end;
+end;
 
 procedure TfrmMenu.ExecutarconsultaSQL1Click(Sender: TObject);
 begin
@@ -235,6 +252,23 @@ procedure TfrmMenu.Propriedadesdaconexo1Click(Sender: TObject);
 begin
     frmConfuguraCon:=TfrmConfuguraCon.Create(self);
     frmConfuguraCon.ShowModal;
+end;
+
+procedure TfrmMenu.RestaurarbackupClick(Sender: TObject);
+var caminho:string;
+    ADOCommand : TADOCommand;
+begin
+      if opdAbrirBackUp.execute then
+         caminho:= opdAbrirBackUp.FileName;
+
+     ADOCommand := TADOCommand.Create(nil);
+     with ADOCommand do
+     begin
+       ADOCommand.ConnectionString := conexao.ConnectionString;
+       ADOCommand.CommandText := 'RESTORE DATABASE '+banco+ 'FILEGROUP=' + caminho+'WITH RECOVERY';
+       ADOCommand.Execute;
+     end;
+
 end;
 
 procedure TfrmMenu.restaurarBancoDeDados;

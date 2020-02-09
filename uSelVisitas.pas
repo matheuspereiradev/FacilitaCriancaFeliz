@@ -26,6 +26,7 @@ type
     frxMailExport1: TfrxMailExport;
     procedure carregaOpcoes;
     procedure btnImprimirClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -49,8 +50,12 @@ uses UMenu;
 procedure TfrmSelecionarRel.btnImprimirClick(Sender: TObject);
 begin
        montaVisitas;
+       if qryReport.RecordCount=0 then
+       begin
+         ShowMessage('nenhum relatório selecionado');
+         exit;
+       end;
        montaCabecalho;
-
        relatorio.ShowReport;
 end;
 
@@ -94,6 +99,7 @@ begin
         add(')');
      end;
      qryReport.Open;
+
 end;
 
 
@@ -132,6 +138,15 @@ begin
     nmMes:=mes;
     codCrianca:=idCrianca;
     carregaOpcoes;
+end;
+
+procedure TfrmSelecionarRel.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+    qryVisitas.Close;
+    qryRelatorio.Close;
+    qryReport.Close;
+    Action := caFree;
 end;
 
 end.

@@ -17,7 +17,6 @@ type
     btnNovoGrupo: TButton;
     btnEditarGrupo: TButton;
     btnExcluirGrupo: TButton;
-    Label24343: TLabel;
     lblTotal: TLabel;
     qryGrupos: TADOQuery;
     Image1: TImage;

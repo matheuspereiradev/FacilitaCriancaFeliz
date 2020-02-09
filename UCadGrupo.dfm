@@ -84,16 +84,19 @@ object frmCadEdtGrupo: TfrmCadEdtGrupo
   end
   object btnSalvarGrupo: TButton
     Left = 118
-    Top = 175
-    Width = 129
-    Height = 33
+    Top = 168
+    Width = 139
+    Height = 40
     Cursor = crHandPoint
-    Caption = 'Salvar'
+    Caption = 'SALVAR'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Arial'
     Font.Style = [fsBold]
+    ImageIndex = 5
+    ImageMargins.Left = 8
+    Images = frmMenu.cxImageList1
     ParentFont = False
     TabOrder = 2
     OnClick = btnSalvarGrupoClick
